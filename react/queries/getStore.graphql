@@ -1,0 +1,70 @@
+query getStore($locationId: String!) {
+  getStoreSchema(locationId: $locationId) {
+    response
+  }
+  getStore(locationId: $locationId) {
+    item {
+      id
+      name
+      description
+      logo {
+        image {
+          url
+        }
+      }
+      mainPhone
+      emails
+      address {
+        postalCode
+        country
+        city
+        state
+        neighborhood
+        street
+        number
+        complement
+        reference
+        geoCoordinates
+        location {
+          latitude
+          longitude
+        }
+      }
+      businessHours {
+        dayOfWeek
+        openingTime
+        closingTime
+      }
+      googleMapLink
+      brands
+      paymentOptions
+      twitterHandle
+      facebookPageUrl
+      instagramHandle
+      customFields {
+        text {
+          id
+          data
+        }
+        textList {
+          id
+          data
+        }
+        image {
+          id
+          data {
+            url
+          }
+        }
+        imageList {
+          id
+          data {
+            image {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}

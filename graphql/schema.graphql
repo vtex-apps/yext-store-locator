@@ -1,0 +1,127 @@
+type Query {
+  getStores(location: String, limit: Int, filter: String): StoresResponse
+    @cacheControl(scope: PRIVATE)
+
+  getStore(locationId: String): StoreResponse @cacheControl(scope: PRIVATE)
+
+  getStoreSchema(locationId: String): StoreSchema @cacheControl(scope: PRIVATE)
+}
+
+type StoreSchema {
+  response: String
+}
+
+type StoresResponse {
+  items: [StoresItemType]
+}
+type StoreResponse {
+  item: StoreItemType
+}
+type StoreItemType {
+  id: String
+  name: String
+  description: String
+  logo: Logo
+  mainPhone: String
+  emails: [String]
+  address: Address
+  businessHours: [Hours]
+  googleMapLink: String
+  brands: [String]
+  paymentOptions: [String]
+  twitterHandle: String
+  facebookPageUrl: String
+  instagramHandle: String
+  customFields: CustomFields
+}
+type StoresItemType {
+  id: String
+  name: String
+  mainPhone: String
+  address: Address
+  businessHours: [Hours]
+  googleMapLink: String
+}
+
+type CustomFields {
+  text: [TextField]
+  textList: [TextListField]
+  image: [ImageField]
+  imageList: [ImageListField]
+}
+
+type TextField {
+  id: String
+  data: String
+}
+
+type TextListField {
+  id: String
+  data: [String]
+}
+
+type ImageField {
+  id: String
+  data: Image
+}
+
+type ImageListField {
+  id: String
+  data: [Logo]
+}
+
+type PickupHolidays {
+  date: String
+  hourBegin: String
+  hourEnd: String
+}
+
+type Address {
+  postalCode: String
+  country: String
+  city: String
+  state: String
+  neighborhood: String
+  street: String
+  number: String
+  complement: String
+  reference: String
+  geoCoordinates: [Float]
+  location: LocationType
+}
+
+type LocationType {
+  latitude: Float
+  longitude: Float
+}
+
+type Hours {
+  dayOfWeek: Int
+  openingTime: String
+  closingTime: String
+}
+
+type Logo {
+  image: Image
+}
+
+type Image {
+  url: String
+  width: Int
+  height: Int
+  sourceUrl: String
+  thumbnails: [Thumbnail]
+}
+
+type Thumbnail {
+  url: String
+  width: Int
+  height: Int
+}
+
+type Paging {
+  page: Int
+  pageSize: Int
+  total: Int
+  pages: Int
+}

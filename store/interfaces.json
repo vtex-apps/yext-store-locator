@@ -1,0 +1,71 @@
+{
+  "store-list": {
+    "component": "List"
+  },
+  "store-group": {
+    "component": "StoreGroup",
+    "composition": "children"
+  },
+  "store-title": {
+    "component": "StoreTitle",
+    "composition": "children"
+  },
+  "store-page-banner": {
+    "component": "StorePageBanner",
+    "composition": "children"
+  },
+  "store-open-banner": {
+    "component": "StoreOpenBanner",
+    "composition": "children"
+  },
+  "store-brands": {
+    "component": "StoreBrands",
+    "composition": "children"
+  },
+  "store-address": {
+    "component": "StoreAddress",
+    "composition": "children"
+  },
+  "store-directions-link": {
+    "component": "StoreDirectionsLink",
+    "composition": "children"
+  },
+  "store-contact": {
+    "component": "StoreContact",
+    "composition": "children"
+  },
+  "store-back-link": {
+    "component": "StoreBackLink",
+    "composition": "children"
+  },
+  "store-hours": {
+    "component": "StoreHours",
+    "composition": "children"
+  },
+  "store-description": {
+    "component": "StoreDescription",
+    "composition": "children"
+  },
+  "store-social-links": {
+    "component": "StoreSocialLinks",
+    "composition": "children"
+  },
+  "store-payment-options": {
+    "component": "StorePaymentOptions",
+    "composition": "children"
+  },
+  "store-map": {
+    "component": "StoreMap",
+    "composition": "children"
+  },
+  "store-nearby-locations": {
+    "component": "StoreNearbyLocations",
+    "composition": "children"
+  },
+  "store-custom-data": {
+    "component": "StoreCustomData",
+    "composition": "children"
+  },
+  "store.storelocator": {},
+  "store.storedetail": {}
+}

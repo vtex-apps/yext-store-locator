@@ -1,0 +1,89 @@
+import React from 'react'
+import { defineMessages } from 'react-intl'
+import { useCssHandles } from 'vtex.css-handles'
+
+import { useStoreGroup } from './StoreGroup'
+
+const CSS_HANDLES = [
+  'storeBrandsContainer',
+  'storeBrandsLabel',
+  'storeBrandsList',
+  'storeBrandsItem',
+] as const
+
+interface StoreBrandsProps {
+  label: string
+}
+
+const StoreBrands: StorefrontFunctionComponent<StoreBrandsProps> = ({
+  label,
+}) => {
+  const handles = useCssHandles(CSS_HANDLES)
+  const group = useStoreGroup()
+
+  if (!group) {
+    return null
+  }
+
+  return (
+    <div className={handles.storeBrandsContainer}>
+      {label && (
+        <div className={`${handles.storeBrandsLabel} b t-heading-6`}>
+          {label}
+        </div>
+      )}
+      <div>
+        <ul
+          className={`${handles.storeBrandsList}`}
+          style={{ columnCount: 3, padding: 0 }}
+        >
+          {group.brands.map((brand, i) => (
+            <li
+              key={i}
+              className={handles.storeBrandsItem}
+              style={{ listStyle: 'none' }}
+            >
+              {brand}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+const messages = defineMessages({
+  title: {
+    defaultMessage: '',
+    id: 'admin/editor.storeBrands.title',
+  },
+  description: {
+    defaultMessage: '',
+    id: 'admin/editor.storeBrands.description',
+  },
+  labelTitle: {
+    defaultMessage: '',
+    id: 'admin/editor.storeBrandsLabel.title',
+  },
+  labelDescription: {
+    defaultMessage: '',
+    id: 'admin/editor.storeBrandsLabel.description',
+  },
+})
+
+StoreBrands.schema = {
+  title: messages.title.id,
+  description: messages.description.id,
+  type: 'object',
+  properties: {
+    label: {
+      title: messages.labelTitle.id,
+      description: messages.labelDescription.id,
+      type: 'string',
+      isLayout: false,
+      default: '',
+    },
+  },
+}
+
+export default StoreBrands

@@ -1,0 +1,30 @@
+query getStores($location: String, $limit: Int, $filter: String) {
+  getStores(location: $location, limit: $limit, filter: $filter) {
+    items {
+      id
+      name
+      mainPhone
+      address {
+        postalCode
+        country
+        city
+        state
+        neighborhood
+        street
+        number
+        complement
+        reference
+        location {
+          latitude
+          longitude
+        }
+      }
+      businessHours {
+        dayOfWeek
+        openingTime
+        closingTime
+      }
+      googleMapLink
+    }
+  }
+}
