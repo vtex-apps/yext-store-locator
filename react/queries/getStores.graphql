@@ -26,5 +26,9 @@ query getStores($location: String, $limit: Int, $filter: String) {
       }
       googleMapLink
     }
+    location {
+      latitude
+      longitude
+    }
   }
 }

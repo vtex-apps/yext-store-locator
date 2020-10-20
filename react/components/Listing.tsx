@@ -36,21 +36,23 @@ const Listing: FC<WrappedComponentProps & any> = ({
 
   return (
     items.length && (
-      <ul className={`list ph3 mt0 ${handles.addressList}`}>
+      <div
+        className={`vh-75-m h-100-s overflow-y-scroll-m overflow-visible-s flex flex-column-m flex-nowrap-m order-1-m order-2-s flex-row-s flex-wrap-s t-small ${handles.addressList}`}
+      >
         {items.map((item: any, i: number) => {
           return (
-            <li
+            <div
               key={`key_${i}`}
-              className={`pointer mb0 ph3 pv5 ${
+              className={`mb0 ph3 pv5 ${
                 !i ? handles.addressListFirstItem : ''
               } ${handles.addressListItem} ${
                 !i ? 'bt' : ''
-              } bb bl br b--light-gray hover-bg-light-gray`}
+              } bb bl br b--light-gray hover-bg-near-white w-100-s`}
               onClick={() => {
                 handleChangeCenter(item, 12)
               }}
             >
-              <div>
+              <div className="mr3">
                 <div className="mb3">
                   <Link
                     className="b no-underline underline-hover"
@@ -67,7 +69,7 @@ const Listing: FC<WrappedComponentProps & any> = ({
                 </div>
 
                 <div>
-                  <div>{item.name}</div>
+                  <div className="mb3 fw5">{item.name}</div>
                   <div>
                     {item.address.number ? `${item.address.number} ` : ''}
                     {item.address.street ? `${item.address.street}` : ''}
@@ -82,9 +84,16 @@ const Listing: FC<WrappedComponentProps & any> = ({
                     }`}
                   </div>
                 </div>
-                <div className="flex">
-                  <div>{item.mainPhone}</div>
-                  <div className="ml6">
+                <div className="flex mt3">
+                  <div className="pr4 br b--gray">
+                    <a
+                      className="no-underline underline-hover"
+                      href={`tel:${item.mainPhone}`}
+                    >
+                      {item.mainPhone}
+                    </a>
+                  </div>
+                  <div className="pl4 bl b--gray">
                     <a
                       href={item.googleMapLink}
                       className="b no-underline underline-hover"
@@ -94,10 +103,10 @@ const Listing: FC<WrappedComponentProps & any> = ({
                   </div>
                 </div>
               </div>
-            </li>
+            </div>
           )
         })}
-      </ul>
+      </div>
     )
   )
 }

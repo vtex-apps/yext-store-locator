@@ -13,6 +13,7 @@ type StoreSchema {
 
 type StoresResponse {
   items: [StoresItemType]
+  location: LocationType
 }
 type StoreResponse {
   item: StoreItemType
