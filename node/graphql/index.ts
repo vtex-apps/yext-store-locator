@@ -3,6 +3,7 @@ import { method } from '@vtex/api'
 import slugify from 'slugify'
 
 import { Entity, EntityCustomFields } from '../typings/yextLocations'
+import formatPhoneNumber from '../utils/formatPhoneNumber'
 
 const DAY = {
   sunday: 0,
@@ -158,7 +159,7 @@ export const resolvers = {
           return {
             id: entity.meta.id,
             name: entity.name,
-            mainPhone: entity.mainPhone,
+            mainPhone: formatPhoneNumber(entity.mainPhone),
             address: {
               postalCode: entity.address.postalCode,
               country: entity.address.countryCode,
@@ -210,7 +211,7 @@ export const resolvers = {
           name: entity.name,
           description: entity.description,
           logo: entity.logo,
-          mainPhone: entity.mainPhone,
+          mainPhone: formatPhoneNumber(entity.mainPhone),
           emails: entity.emails,
           address: {
             postalCode: entity.address.postalCode,
