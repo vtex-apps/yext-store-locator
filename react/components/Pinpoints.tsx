@@ -122,7 +122,7 @@ const Pinpoints = withScriptjs(
           return (
             <Marker
               key={`marker_${i}`}
-              icon={icon}
+              icon={icon?.url}
               position={{ lat: latitude, lng: longitude }}
               onClick={() => {
                 handleMarkState(item.id)
