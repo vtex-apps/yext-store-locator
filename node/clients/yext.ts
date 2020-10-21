@@ -40,7 +40,7 @@ export default class Yext extends ExternalClient {
     filter,
   }: GeoLocationsArgs): Promise<GeoSearchApi> {
     const withFilter = filter ? `&filter=${encodeURIComponent(filter)}` : ''
-    const endpoint = `/v2/accounts/me/entities/geosearch?api_key=${apiKey}&v=${API_VERSION}&location=${location})&resolvePlaceholders=true&entityTypes=location&radius=${radius}&limit=${limit}${withFilter}`
+    const endpoint = `/v2/accounts/me/entities/geosearch?api_key=${apiKey}&v=${API_VERSION}&location=${location}&resolvePlaceholders=true&entityTypes=location&radius=${radius}&limit=${limit}${withFilter}`
 
     return this.http.get(endpoint)
   }

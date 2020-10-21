@@ -26,7 +26,7 @@ interface Meta {
 interface GeoResponse {
   entities: Entity[]
   count: number
-  geo: Geo
+  geo?: Geo
   distances: Distance[]
 }
 

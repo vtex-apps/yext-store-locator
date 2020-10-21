@@ -9,7 +9,7 @@ interface StoreResult {
 export interface StoresResult {
   getStores: {
     items: SpecificationGroup[]
-    location: Location
+    location: Location | null
   }
 }
 interface BusinessHours {

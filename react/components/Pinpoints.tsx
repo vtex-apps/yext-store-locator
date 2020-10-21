@@ -27,7 +27,6 @@ const CSS_HANDLES = [
   'markerInfoLink',
 ] as const
 
-// let initialLoad = false
 const Pinpoints = withScriptjs(
   withGoogleMap((props: any) => {
     const [state, setState] = useState({
