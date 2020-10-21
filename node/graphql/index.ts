@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { method } from '@vtex/api'
 import slugify from 'slugify'
 
@@ -81,23 +80,19 @@ export const resolvers = {
       method({
         GET: async (ctx: Context) => {
           try {
-            const stores: any = await resolvers.Query.getStores(
-              null,
-              { location: null, limit: 50 },
-              ctx
-            )
+            const response = await resolvers.Query.getAllStores(null, null, ctx)
 
             ctx.set('Content-Type', 'text/xml')
 
             const lastMod = new Date().toISOString()
             const storesMap = `
               <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-                ${stores?.items
-                  .map((item: any) => {
+                ${response
+                  .map((item) => {
                     return `<url>
                   <loc>https://${ctx.vtex.host}/store/${Slugify(
-                      `${item.name} ${item.address.state} ${item.address.postalCode}`
-                    )}/${String(item.id).replace('1_', '')}</loc>
+                      `${item.name} ${item.address.region} ${item.address.postalCode}`
+                    )}/${String(item.meta.id).replace('1_', '')}</loc>
                   <lastmod>${lastMod}</lastmod>
                   <changefreq>daily</changefreq>
                   <priority>0.8</priority>
@@ -133,6 +128,36 @@ export const resolvers = {
 
       return { response: JSON.stringify(response) }
     },
+    getAllStores: async (_: any, _param: any, ctx: Context) => {
+      const {
+        clients: { apps, yext },
+      } = ctx
+
+      const appId = process.env.VTEX_APP_ID as string
+      const settings = await apps.getAppSettings(appId)
+
+      const locations: Entity[] = []
+      let pageToken = ''
+
+      do {
+        // eslint-disable-next-line no-await-in-loop
+        const response = await yext.getLocations({
+          apiKey: settings.apiKey,
+          limit: 50,
+          pageToken,
+        })
+
+        const data = response?.response?.entities?.map((entity) => entity)
+
+        if (data) {
+          locations.push(...data)
+        }
+
+        pageToken = response.response.pageToken ?? ''
+      } while (pageToken)
+
+      return locations
+    },
     getStores: async (_: any, param: any, ctx: Context) => {
       const { location, limit, filter } = param
       const {
@@ -144,14 +169,14 @@ export const resolvers = {
 
       const { response } = await yext.getLocationsByAddress({
         apiKey: settings.apiKey,
-        location: location || settings.defaultLocation || 85251,
+        location: location || settings.defaultLocation,
         limit,
         radius: 2500,
         filter,
       })
 
-      if (!response?.entities) {
-        return []
+      if (!response) {
+        return null
       }
 
       const locations = {

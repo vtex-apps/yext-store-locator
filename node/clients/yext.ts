@@ -9,6 +9,7 @@ import {
 interface GetLocationsArgs {
   apiKey: string
   limit: number
+  pageToken: string
 }
 
 interface GetLocationArgs {
@@ -16,7 +17,7 @@ interface GetLocationArgs {
   locationId: string
 }
 
-interface GeoLocationsArgs extends GetLocationsArgs {
+interface GeoLocationsArgs {
   apiKey: string
   location: string
   limit: number
@@ -47,8 +48,10 @@ export default class Yext extends ExternalClient {
   public async getLocations({
     apiKey,
     limit,
+    pageToken,
   }: GetLocationsArgs): Promise<EntityListApi> {
-    const endpoint = `/v2/accounts/me/entities?api_key=${apiKey}&v=${API_VERSION}&entityTypes=location&limit=${limit}&resolvePlaceholders=true`
+    const withPageToken = pageToken ? `&pageToken=${pageToken}` : ''
+    const endpoint = `/v2/accounts/me/entities?api_key=${apiKey}&v=${API_VERSION}&entityTypes=location&limit=${limit}${withPageToken}`
 
     return this.http.get(endpoint)
   }

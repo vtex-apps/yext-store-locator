@@ -10,7 +10,12 @@ export interface EntityApi {
 
 export interface EntityListApi {
   meta: Meta
-  response: Entity[]
+  response: EntityListResponse
+}
+interface EntityListResponse {
+  count: number
+  entities: Entity[]
+  pageToken?: string
 }
 
 interface Meta {

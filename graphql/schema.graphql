@@ -5,6 +5,9 @@ type Query {
   getStore(locationId: String): StoreResponse @cacheControl(scope: PRIVATE)
 
   getStoreSchema(locationId: String): StoreSchema @cacheControl(scope: PRIVATE)
+
+  getAllStores(locationId: String): AllStoreResponse
+    @cacheControl(scope: PRIVATE)
 }
 
 type StoreSchema {
@@ -17,6 +20,10 @@ type StoresResponse {
 }
 type StoreResponse {
   item: StoreItemType
+}
+
+type AllStoreResponse {
+  item: [StoreItemType]
 }
 type StoreItemType {
   id: String
