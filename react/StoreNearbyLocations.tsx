@@ -32,7 +32,8 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
   }
 
   if (!called) {
-    const currentStoreFilter = `{"meta.id":{"!$eq":"${group.id}"}}`
+    // Filter current location and locations tagged as closed
+    const currentStoreFilter = `{"meta.id":{"!$eq":"${group.id}"},"closed":{"$eq":false}}`
 
     getStores({
       variables: {

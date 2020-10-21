@@ -46,6 +46,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
 
     getStores({
       variables: {
+        filter: `{"closed":{"$eq":false}}`,
         location: location || null,
         limit: 15,
       },
