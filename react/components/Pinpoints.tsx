@@ -27,8 +27,19 @@ const CSS_HANDLES = [
   'markerInfoLink',
 ] as const
 
+interface PinpointProps {
+  items: SpecificationGroup[]
+  onChangeCenter: (lon: number, lat: number, zoomSize: number) => void
+  zoom: number
+  center: number[]
+  icon: string
+  iconWidth: string
+  iconHeight: string
+  intl: any
+}
+
 const Pinpoints = withScriptjs(
-  withGoogleMap((props: any) => {
+  withGoogleMap<PinpointProps>((props) => {
     const [state, setState] = useState({
       markerState: {},
     })

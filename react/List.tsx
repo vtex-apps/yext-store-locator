@@ -34,8 +34,8 @@ const StoreList: StorefrontFunctionComponent<any> = ({
   )
 
   const [search, setSearch] = useState<string>('')
-  const [longitude, setLongitude] = useState<number | null>(null)
-  const [latitude, setlatitude] = useState<number | null>(null)
+  const [longitude, setLongitude] = useState<number>(0)
+  const [latitude, setlatitude] = useState<number>(0)
   const [update, setUpdate] = useState<boolean>(false)
   const [zoom, setZoom] = useState<number>(6)
 
@@ -79,7 +79,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
     }
   }
 
-  if (called) {
+  if (called && googleMapsKeys) {
     if (!loading && data?.getStores.items.length === 0) {
       loadAll('')
     }
@@ -91,7 +91,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
           data.getStores.location.latitude,
           6
         )
-      } else {
+      } else if (data.getStores.items[0]) {
         const {
           longitude: lon,
           latitude: lat,
@@ -131,26 +131,28 @@ const StoreList: StorefrontFunctionComponent<any> = ({
           <div
             className={`flex-grow-1 order-2-m order-1-s ${handles.storesMapCol}`}
           >
-            <Pinpoints
-              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={
-                <div
-                  className={handles.listingMapContainer}
-                  style={{ height: `100%` }}
-                />
-              }
-              mapElement={
-                <div className="h-100" style={{ minHeight: '400px' }} />
-              }
-              items={stores}
-              onChangeCenter={handleCenter}
-              zoom={zoom}
-              center={[longitude, latitude]}
-              icon={icon}
-              iconWidth={iconWidth}
-              iconHeight={iconHeight}
-            />
+            {latitude && longitude && (
+              <Pinpoints
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={
+                  <div
+                    className={handles.listingMapContainer}
+                    style={{ height: `100%` }}
+                  />
+                }
+                mapElement={
+                  <div className="h-100" style={{ minHeight: '400px' }} />
+                }
+                items={stores}
+                onChangeCenter={handleCenter}
+                zoom={zoom}
+                center={[longitude, latitude]}
+                icon={icon}
+                iconWidth={iconWidth}
+                iconHeight={iconHeight}
+              />
+            )}
           </div>
         </div>
       </div>

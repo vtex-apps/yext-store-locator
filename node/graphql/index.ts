@@ -204,10 +204,12 @@ export const resolvers = {
             googleMapLink: buildMapLink(entity),
           }
         }),
-        location: {
-          latitude: response.geo.coordinate.latitude,
-          longitude: response.geo.coordinate.longitude,
-        },
+        location: response.geo
+          ? {
+              latitude: response.geo?.coordinate.latitude,
+              longitude: response.geo?.coordinate.longitude,
+            }
+          : null,
       }
 
       return locations
