@@ -79,7 +79,8 @@
         "type": "string",
         "access": "public",
         "title": "Default Map Location Address",
-        "description": "Default address to center store location map when the user's location can not be determined"
+        "description": "Default address to center store location map when the user's location can not be determined",
+        "default": "USA"
       }
     }
   },
