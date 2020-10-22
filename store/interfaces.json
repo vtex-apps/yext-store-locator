@@ -70,6 +70,10 @@
     "component": "StoreCustomData",
     "composition": "children"
   },
+  "store-conditional": {
+    "component": "StoreConditional",
+    "composition": "children"
+  },
   "store.storelocator": {},
   "store.storedetail": {}
 }
