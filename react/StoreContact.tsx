@@ -39,7 +39,7 @@ const StoreContact: StorefrontFunctionComponent<StoreContactProps> = ({
   return (
     <div className={handles.storeContactsContainer}>
       <div className={`${handles.storeContactsContact} b`}>{text}</div>
-      <div className={`${handles.storeContactsLabel} b t-small`}>
+      <div className={`${handles.storeContactsLabel} t-small`}>
         {text && label}
       </div>
     </div>

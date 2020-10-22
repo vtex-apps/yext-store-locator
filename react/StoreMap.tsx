@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { defineMessages } from 'react-intl'
+import { useCssHandles } from 'vtex.css-handles'
 import { graphql, compose } from 'react-apollo'
 
 import { useStoreGroup } from './StoreGroup'
 import Map from './components/Map'
 import GOOGLE_KEYS from './queries/GetGoogleMapsKey.graphql'
+
+const CSS_HANDLES = ['storeMapContainer'] as const
 
 interface StoreMapProps {
   width: string
@@ -24,6 +27,7 @@ const StoreMap: StorefrontFunctionComponent<StoreMapProps> = ({
   iconWidth,
   iconHeight,
 }) => {
+  const handles = useCssHandles(CSS_HANDLES)
   const group = useStoreGroup()
 
   if (!group || !googleMapsKeys?.logistics?.googleMapsKey) {
@@ -31,23 +35,18 @@ const StoreMap: StorefrontFunctionComponent<StoreMapProps> = ({
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <div>
-        <img className="mw5" src={group.logo.image.url} alt="altText" />
-      </div>
-      <div className="flex items-center">
-        <Map
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height, width }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          icon={icon}
-          iconWidth={iconWidth}
-          iconHeight={iconHeight}
-          center={group.address.geoCoordinates}
-        />
-      </div>
-    </div>
+    <Map
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
+      loadingElement={<div style={{ height: `100%` }} />}
+      containerElement={
+        <div className={handles.storeMapContainer} style={{ height, width }} />
+      }
+      mapElement={<div style={{ height: `100%` }} />}
+      icon={icon}
+      iconWidth={iconWidth}
+      iconHeight={iconHeight}
+      center={group.address.geoCoordinates}
+    />
   )
 }
 
@@ -104,7 +103,7 @@ const messages = defineMessages({
 
 StoreMap.defaultProps = {
   width: '300px',
-  height: '300px',
+  height: '150px',
 }
 
 StoreMap.schema = {
