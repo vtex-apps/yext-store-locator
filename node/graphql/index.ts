@@ -2,7 +2,6 @@ import { method } from '@vtex/api'
 import slugify from 'slugify'
 
 import { Entity, EntityCustomFields } from '../typings/yextLocations'
-import formatPhoneNumber from '../utils/formatPhoneNumber'
 
 const DAY = {
   sunday: 0,
@@ -27,14 +26,37 @@ const buildMapLink = (entity: Entity) => {
   return `https://www.google.com/maps/dir/?api=1&destination=${mapAddress}`
 }
 
-const formatBusinessHours = (entity: Entity) => {
+const hoursFormat = (time: string, use24HourDisplay: boolean) => {
+  const [hour, minute] = time.split(':')
+
+  if (!use24HourDisplay) {
+    return `${
+      parseInt(hour, 10) > 12 ? parseInt(hour, 10) - 12 : hour
+    }:${minute}${parseInt(hour, 10) >= 12 ? ' pm' : ' am'}`
+  }
+
+  return `${hour}:${minute}`
+}
+
+const formatBusinessHours = (entity: Entity, format: boolean) => {
   const businessHours = Object.keys(entity.hours).map((key) => {
     const hours = entity.hours[key as keyof typeof DAY].openIntervals
 
+    const start = hours?.[0].start
+    const end = hours?.[0].end
+
+    const openingTime = start ? hoursFormat(start, format) : null
+    const closingTime = end ? hoursFormat(end, format) : null
+    const hoursDisplay =
+      !openingTime && !closingTime
+        ? `Closed`
+        : `${openingTime ?? ''} - ${closingTime ?? ''}`
+
     return {
       dayOfWeek: DAY[key as keyof typeof DAY],
-      openingTime: hours ? hours[0].start : null,
-      closingTime: hours ? hours[0].end : null,
+      openingTime,
+      closingTime,
+      hoursDisplay,
     }
   })
 
@@ -68,6 +90,17 @@ const mapCustomFields = (entity: EntityCustomFields) => {
   )
 
   return customFields
+}
+
+const formatPhoneNumber = (phoneNumber: string) => {
+  const cleaned = `${phoneNumber}`.replace(/\D/g, '')
+  const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+
+  if (match) {
+    return ['(', match[2], ') ', match[3], '-', match[4]].join('')
+  }
+
+  return null
 }
 
 const Slugify = (str: string) => {
@@ -166,10 +199,11 @@ export const resolvers = {
 
       const appId = process.env.VTEX_APP_ID as string
       const settings = await apps.getAppSettings(appId)
+      const { apiKey, use24Hour, defaultLocation } = settings
 
       const { response } = await yext.getLocationsByAddress({
-        apiKey: settings.apiKey,
-        location: location || settings.defaultLocation,
+        apiKey,
+        location: location || defaultLocation,
         limit,
         radius: 2500,
         filter,
@@ -200,7 +234,7 @@ export const resolvers = {
                 longitude: entity.cityCoordinate.longitude,
               },
             },
-            businessHours: formatBusinessHours(entity),
+            businessHours: formatBusinessHours(entity, use24Hour),
             googleMapLink: buildMapLink(entity),
           }
         }),
@@ -222,9 +256,10 @@ export const resolvers = {
 
       const appId = process.env.VTEX_APP_ID as string
       const settings = await apps.getAppSettings(appId)
+      const { apiKey, use24Hour } = settings
 
       const { response: entity } = await yext.getLocation({
-        apiKey: settings.apiKey,
+        apiKey,
         locationId,
       })
 
@@ -259,7 +294,7 @@ export const resolvers = {
               longitude: entity.cityCoordinate.longitude,
             },
           },
-          businessHours: formatBusinessHours(entity),
+          businessHours: formatBusinessHours(entity, use24Hour),
           googleMapLink: buildMapLink(entity),
           brands: entity.brands,
           paymentOptions: entity.paymentOptions,

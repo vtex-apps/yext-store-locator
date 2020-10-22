@@ -107,6 +107,7 @@ type Hours {
   dayOfWeek: Int
   openingTime: String
   closingTime: String
+  hoursDisplay: String
 }
 
 type Logo {

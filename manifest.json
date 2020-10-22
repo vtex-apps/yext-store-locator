@@ -81,6 +81,13 @@
         "title": "Default Map Location Address",
         "description": "Default address to center store location map when the user's location can not be determined",
         "default": "USA"
+      },
+      "use24Hour": {
+        "type": "boolean",
+        "access": "public",
+        "title": "Use 24-Hour Clock",
+        "description": "Use a 24-hour time to display store hours",
+        "default": false
       }
     }
   },

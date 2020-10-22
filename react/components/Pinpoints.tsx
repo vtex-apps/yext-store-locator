@@ -14,7 +14,7 @@ import slugify from 'slugify'
 import { useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 
-import timeFormat from '../utils/timeFormat'
+import { SpecificationGroup } from '../typings/store'
 
 const Slugify = (str: string) => {
   return slugify(str, { lower: true, remove: /[*+~.()'"!:@]/g })
@@ -126,7 +126,7 @@ const Pinpoints = withScriptjs(
 
     return (
       <GoogleMap defaultZoom={10} zoom={zoom} center={{ lat, lng }}>
-        {props.items.map((item: any, i: number) => {
+        {props.items.map((item, i: number) => {
           const { latitude, longitude } = item.address.location
 
           return (
@@ -174,17 +174,14 @@ const Pinpoints = withScriptjs(
                       {item.mainPhone ? `${item.mainPhone}` : ''}
                     </div>
                     <br />
-                    {item.businessHours.map((e: any, index: number) => {
+                    {item.businessHours.map((hours, index: number) => {
                       return (
                         <div key={`hour_${index}`} className="">
                           <span className="">
-                            {intl.formatMessage(messages[e.dayOfWeek])}
+                            {intl.formatMessage(messages[hours.dayOfWeek])}
                           </span>
                           <br />
-                          <span className="">
-                            {timeFormat(e.openingTime)}
-                            {` - `} {timeFormat(e.closingTime)}
-                          </span>
+                          <span className="">{hours.hoursDisplay}</span>
                         </div>
                       )
                     })}

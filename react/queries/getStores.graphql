@@ -23,6 +23,7 @@ query getStores($location: String, $limit: Int, $filter: String) {
         dayOfWeek
         openingTime
         closingTime
+        hoursDisplay
       }
       googleMapLink
     }

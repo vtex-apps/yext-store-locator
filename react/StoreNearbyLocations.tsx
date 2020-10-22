@@ -4,7 +4,6 @@ import { useCssHandles } from 'vtex.css-handles'
 import { defineMessages } from 'react-intl'
 
 import GET_STORES from './queries/getStores.graphql'
-import timeFormat from './utils/timeFormat'
 import StoreLink from './components/StoreLink'
 import { useStoreGroup } from './StoreGroup'
 import { StoresResult } from './typings/store'
@@ -46,7 +45,8 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
 
   const today = new Date().getDay()
   const hours = group.businessHours.find((e) => e.dayOfWeek === today)
-  const closingTime = hours?.closingTime && timeFormat(hours.closingTime, '12H')
+  const closingTime = hours?.closingTime
+
   const closingMessage = closingTime
     ? `Open Until ${closingTime}`
     : 'Closed today'

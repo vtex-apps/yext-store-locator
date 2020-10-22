@@ -16,6 +16,7 @@ interface BusinessHours {
   openingTime: string | null
   dayOfWeek: number
   closingTime: string | null
+  hoursDisplay: string
 }
 interface Address {
   addressId: string

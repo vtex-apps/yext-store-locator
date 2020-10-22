@@ -3,8 +3,6 @@ import { defineMessages, FormattedMessage, injectIntl } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
 import { useStoreGroup } from './StoreGroup'
-import { BusinessHours } from './typings/store'
-import timeFormat from './utils/timeFormat'
 
 const CSS_HANDLES = [
   'hoursContainer',
@@ -78,7 +76,6 @@ const messages = defineMessages({
 
 const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
   label,
-  format,
   intl,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
@@ -88,22 +85,11 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
     return null
   }
 
-  const displayTime = (item: BusinessHours) => {
-    const openTime = item?.openingTime && timeFormat(item.openingTime, format)
-    const closeTime = item?.closingTime && timeFormat(item.closingTime, format)
-
-    if (!openTime && !closeTime) {
-      return `Closed`
-    }
-
-    return `${openTime ?? ''} - ${closeTime ?? ''}`
-  }
-
   return (
     <div className={`${handles.hoursContainer} mh5`}>
       <div className={`b mb5 t-heading-6 ${handles.hoursLabel}`}>
         {label ?? (
-          <FormattedMessage id="store/yext-store-locator.storeHours.labela" />
+          <FormattedMessage id="store/yext-store-locator.storeHours.label" />
         )}
       </div>
       <div>
@@ -116,7 +102,7 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
               <div className={handles.dayOfWeek}>
                 {intl.formatMessage(messages[hours.dayOfWeek])}
               </div>
-              <div className={handles.businessHours}>{displayTime(hours)}</div>
+              <div className={handles.businessHours}>{hours.hoursDisplay}</div>
             </div>
           )
         })}
