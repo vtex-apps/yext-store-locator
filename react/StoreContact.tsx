@@ -5,9 +5,9 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useStoreGroup } from './StoreGroup'
 
 const CSS_HANDLES = [
-  'storeContactsContainer',
-  'storeContactsContact',
-  'storeContactsLabel',
+  'contactsContainer',
+  'contactsContact',
+  'contactsLabel',
 ] as const
 
 interface StoreContactProps {
@@ -37,11 +37,9 @@ const StoreContact: StorefrontFunctionComponent<StoreContactProps> = ({
   }
 
   return (
-    <div className={handles.storeContactsContainer}>
-      <div className={`${handles.storeContactsContact} b`}>{text}</div>
-      <div className={`${handles.storeContactsLabel} t-small`}>
-        {text && label}
-      </div>
+    <div className={handles.contactsContainer}>
+      <div className={`${handles.contactsContact} b`}>{text}</div>
+      <div className={`${handles.contactsLabel} t-small`}>{text && label}</div>
     </div>
   )
 }

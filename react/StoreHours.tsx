@@ -7,14 +7,13 @@ import { useStoreGroup } from './StoreGroup'
 const CSS_HANDLES = [
   'hoursContainer',
   'hoursLabel',
-  'hourRow',
-  'dayOfWeek',
-  'businessHours',
+  'hoursRow',
+  'hoursDayOfWeek',
+  'hoursText',
 ] as const
 
 interface StoreHoursProps {
   label?: string
-  format?: '12H' | '24H'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intl: any
 }
@@ -35,14 +34,6 @@ const messages = defineMessages({
   labelDescription: {
     defaultMessage: '',
     id: 'admin/editor.storeHoursLabel.description',
-  },
-  formatTitle: {
-    defaultMessage: '',
-    id: 'admin/editor.storeHoursFormat.title',
-  },
-  formatDescription: {
-    defaultMessage: '',
-    id: 'admin/editor.storeHoursFormat.description',
   },
   '0': {
     defaultMessage: 'Sunday',
@@ -97,12 +88,12 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
           return (
             <div
               key={`hour_${i}`}
-              className={`${handles.hourRow} mv2 flex justify-between`}
+              className={`${handles.hoursRow} mv2 flex justify-between`}
             >
-              <div className={handles.dayOfWeek}>
+              <div className={handles.hoursDayOfWeek}>
                 {intl.formatMessage(messages[hours.dayOfWeek])}
               </div>
-              <div className={handles.businessHours}>{hours.hoursDisplay}</div>
+              <div className={handles.hoursText}>{hours.hoursDisplay}</div>
             </div>
           )
         })}
@@ -113,7 +104,6 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
 
 StoreHours.defaultProps = {
   label: undefined,
-  format: undefined,
 }
 
 StoreHours.schema = {
@@ -127,14 +117,6 @@ StoreHours.schema = {
       type: 'string',
       isLayout: false,
       default: '',
-    },
-    format: {
-      title: messages.labelTitle.id,
-      description: messages.labelDescription.id,
-      type: 'string',
-      enum: ['12H', '24H'],
-      isLayout: false,
-      default: '12H',
     },
   },
 }

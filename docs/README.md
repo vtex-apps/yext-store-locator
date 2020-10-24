@@ -1,6 +1,6 @@
 📢 Use this project, [contribute](https://github.com/{OrganizationName}/{AppName}) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
-# APP NAME
+# Yext Store Locator
 
 <!-- DOCS-IGNORE:start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -10,24 +10,65 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- DOCS-IGNORE:end -->
 
-Under the app's name, you should explain the topic, giving a **brief description** of its **functionality** in a store when installed.
-
-Next, **add media** (either an image of a GIF) with the rendered components, so that users can better understand how the app works in practice.
-
-![Media Placeholder](https://user-images.githubusercontent.com/52087100/71204177-42ca4f80-227e-11ea-89e6-e92e65370c69.png)
+The Yext Store Locator app provides a way to bring in loction data from the Yext Live API and create a store locator map, as well as, individual store pages for each location.
 
 ## Configuration
 
-In this section, you first must **add the primary instructions** that will allow users to use the app's blocks in their store, such as:
+### Step 1 - Installing the Yext Store Locator
 
-1. Adding the app as a theme dependency in the `manifest.json` file;
-2. Declaring the app's main block in a given theme template or inside another block from the theme.
+Using your terminal and [VTEX IO Toolbelt](https://vtex.io/docs/recipes/development/vtex-io-cli-installation-and-command-reference/#command-reference), log in to the VTEX account you are working on and [install](https://vtex.io/docs/recipes/store/installing-an-app) the `vtex.yext-store-locator@0.x` app.
 
-Remember to add a table with all blocks exported by the app and their descriptions. You can verify an example of it on the [Search Result documentation](https://vtex.io/docs/components/all/vtex.search-result@3.56.1/).
+### Step 2 - Defining the app settings
 
-Next, add the **props table** containing your block's props.
+In your VTEX account's admin, perform the following actions:
 
-If the app exports more than one block, create several tables - one for each block. For example:
+1. Access the **Apps** section and then **My Apps**.
+2. Select the **Yext Store Locator** app box.
+3. In the Settings section, enter your **Yext API key**.
+4. Save your changes.
+
+### Step 3 - Adding the locations map and store pages
+
+Before performing the following actions, make sure you already are logged into the desired VTEX account and working on a [Developer workspace](https://vtex.io/docs/recipes/development/creating-a-development-workspace/).
+
+1. Open your Store Theme app in your code editor.
+2. Add the `yext-store-locator` app as a `peerDependency` in your theme's `manifest.json` file:
+
+```diff
+ "peerDependencies": {
++  "vtex.yext-store-locator": "0.x"
+ }
+```
+
+| Store page           | Description                                                                                     |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| `store.storelocator` | Provides a listing of your store locations along with a map and markers for the store locations |
+| `store.storedetail`  | A context component that provides data for an individual store page's child blocks.             |
+
+### Step 4 - Declaring the pages' blocks
+
+The Yext Store Locator app provides the following blocks for your use:
+
+| Block name               | Description                                                                                                                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `store-address`          | Show the store address                                                                                                                                                                             |
+| `store-back-link`        | Display a link to navigate back to the store locator map                                                                                                                                           |
+| `store-brands`           | Show a list of brands available at the store                                                                                                                                                       |
+| `store-conditional`      | A wrapper component that will only render its child blocks if the passed in custom data prop returns content. Used in cases where custom data may be used in some locations, but absent in others. |
+| `store-contact`          | Show store contact information.                                                                                                                                                                    |
+| `store-custom-data`      | Show a custom data field from your Yext location                                                                                                                                                   |
+| `store-description`      | Show the store description                                                                                                                                                                         |
+| `store-group`            | A context component that provides data for the store page's child blocks.                                                                                                                          |
+| `store-hours`            | Show the store hours. .                                                                                                                                                                            |
+| `store-list`             | List of stores that are displayed on the map.                                                                                                                                                      |
+| `store-logo`             | Show the store logo.                                                                                                                                                                               |
+| `store-map`              | Map component that displays markers for each store in the `store-list`                                                                                                                             |
+| `store-nearby-locations` | Used on the store page to display nearby stores.                                                                                                                                                   |
+| `store-open-banner`      | Banner to display the open until time for the current day.                                                                                                                                         |
+| `store-page-banner`      | Banner component that can be customized with store data.                                                                                                                                           |
+| `store-payment-options`  | Show the payment options available as the store.                                                                                                                                                   |
+| `store-social-links`     | Show the stores social media links.                                                                                                                                                                |
+| `store-title`            | Title block that contains the stores name and location.                                                                                                                                            |
 
 ### `block-1` props
 
@@ -60,31 +101,62 @@ When documenting a prop whose type is `object` or `array` another prop table wil
 
 Remember to also use this Configuration section to **showcase any necessary disclaimer** related to the app and its blocks, such as the different behavior it may display during its configuration.
 
-## Modus Operandi _(not mandatory)_
-
-There are scenarios in which an app can behave differently in a store, according to how it was added to the catalog, for example. It's crucial to go through these **behavioral changes** in this section, allowing users to fully understand the **practical application** of the app in their store.
-
-If you feel compelled to give further details about the app, such as it's **relationship with the VTEX admin**, don't hesitate to use this section.
-
 ## Customization
-
-The first thing that should be present in this section is the sentence below, showing users the recipe pertaining to CSS customization in apps:
 
 `In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).`
 
-Thereafter, you should add a single column table with the available CSS handles for the app, like the one below. Note that the Handles must be ordered alphabetically.
-
-| CSS Handles |
-| ----------- |
-| `XXXXX`     |
-| `XXXXX`     |
-| `XXXXX`     |
-| `XXXXX`     |
-| `XXXXX`     |
-
-If there are none, add the following sentence instead:
-
-`No CSS Handles are available yet for the app customization.`
+| CSS Handles                    |
+| ------------------------------ |
+| `addressContainer`             |
+| `addressBlock`                 |
+| `addressLabel`                 |
+| `addressDirectionsContainer`   |
+| `addressDirectionsLink`        |
+| `backLinkContainer`            |
+| `backLink`                     |
+| `brandsContainer`              |
+| `brandsLabel`                  |
+| `brandsList`                   |
+| `brandsItem`                   |
+| `contactsContainer`            |
+| `contactsContact`              |
+| `contactsLabel`                |
+| `customDataTextContainer`      |
+| `customDataTextListContainer`  |
+| `customDataTextListLabel`      |
+| `customDataTextList`           |
+| `customDataTextListItem`       |
+| `customDataImageContainer`     |
+| `customDataImageListContainer` |
+| `customDataImageListItem`      |
+| `hoursContainer`               |
+| `hoursLabel`                   |
+| `hoursRow`                     |
+| `hoursDayOfWeek`               |
+| `hoursText`                    |
+| `logoContainer`                |
+| `mapContainer`                 |
+| `nearbyLocationsBlock`         |
+| `nearbyLocationsTitle`         |
+| `nearbyLocationsContainer`     |
+| `nearbyLocationsItem`          |
+| `nearbyLocationsAddress`       |
+| `nearbyLocationsLinkContainer` |
+| `nearbyLocationsLink`          |
+| `openBanner`                   |
+| `bannerContainer`              |
+| `bannerHeader`                 |
+| `bannerSubheader`              |
+| `paymentOptionsContainer`      |
+| `paymentOptionsLabel`          |
+| `paymentOptionsText`           |
+| `socialLinksBlock`             |
+| `socialLinksHeader`            |
+| `socialLinksTitle`             |
+| `socialLinksSubtitle`          |
+| `socialLinksContainer`         |
+| `socialLinkTag`                |
+| `storeTitle`                   |
 
 <!-- DOCS-IGNORE:start -->
 

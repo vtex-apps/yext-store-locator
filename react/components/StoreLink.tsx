@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import slugify from 'slugify'
-import { Link } from 'vtex.render-runtime'
+import { Link, useRuntime } from 'vtex.render-runtime'
 
 import { SpecificationGroup } from '../typings/store'
 
@@ -12,10 +12,13 @@ const Slugify = (str: string) => {
 }
 
 const StoreLink: FC<StoreLinkProps> = ({ item }) => {
+  const { location } = useRuntime()
+
   return (
     <Link
       className="b no-underline underline-hover"
       page="store.storedetail"
+      onClick={() => location.reload()}
       params={{
         slug: `${Slugify(
           `${item.name} ${item.address.state} ${item.address.postalCode}`

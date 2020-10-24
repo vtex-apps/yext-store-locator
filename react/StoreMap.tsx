@@ -8,7 +8,7 @@ import { useStoreGroup } from './StoreGroup'
 import Map from './components/Map'
 import GOOGLE_KEYS from './queries/GetGoogleMapsKey.graphql'
 
-const CSS_HANDLES = ['storeMapContainer'] as const
+const CSS_HANDLES = ['mapContainer'] as const
 
 interface StoreMapProps {
   width: string
@@ -39,7 +39,7 @@ const StoreMap: StorefrontFunctionComponent<StoreMapProps> = ({
       googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={
-        <div className={handles.storeMapContainer} style={{ height, width }} />
+        <div className={handles.mapContainer} style={{ height, width }} />
       }
       mapElement={<div style={{ height: `100%` }} />}
       icon={icon}

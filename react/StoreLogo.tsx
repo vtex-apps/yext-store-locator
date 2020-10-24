@@ -5,7 +5,7 @@ import { useCssHandles } from 'vtex.css-handles'
 
 import { useStoreGroup } from './StoreGroup'
 
-const CSS_HANDLES = ['storeLogoContainer'] as const
+const CSS_HANDLES = ['logoContainer'] as const
 
 interface StoreLogoProps {
   width: string
@@ -24,7 +24,7 @@ const StoreLogo: StorefrontFunctionComponent<StoreLogoProps> = ({
   }
 
   return (
-    <div style={{ height, width }} className={handles.storeLogoContainer}>
+    <div style={{ height, width }} className={handles.logoContainer}>
       <img src={group.logo.image.url} alt="Logo" />
     </div>
   )

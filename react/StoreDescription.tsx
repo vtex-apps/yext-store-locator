@@ -5,9 +5,9 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useStoreGroup } from './StoreGroup'
 
 const CSS_HANDLES = [
-  'storeDescriptionContainer',
-  'storeDescriptionLabel',
-  'storeDescription',
+  'descriptionContainer',
+  'descriptionLabel',
+  'descriptionText',
 ] as const
 
 interface StoreDescriptionProps {
@@ -25,15 +25,15 @@ const StoreDescription: StorefrontFunctionComponent<StoreDescriptionProps> = ({
   }
 
   return (
-    <div className={`${handles.storeDescriptionContainer} mh7 mb7`}>
+    <div className={`${handles.descriptionContainer} mh7 mb7`}>
       {label && (
-        <div className={`${handles.storeDescriptionLabel} b t-heading-6`}>
+        <div className={`${handles.descriptionLabel} b t-heading-6`}>
           {label}
         </div>
       )}
 
       <div>
-        <p className={`${handles.storeDescription} t-body`}>
+        <p className={`${handles.descriptionText} t-body`}>
           {group.description}
         </p>
       </div>

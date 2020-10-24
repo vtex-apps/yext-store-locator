@@ -5,9 +5,9 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useStoreGroup } from './StoreGroup'
 
 const CSS_HANDLES = [
-  'storePaymentOptionsContainer',
-  'storePaymentOptionsLabel',
-  'storePaymentOptionsText',
+  'paymentOptionsContainer',
+  'paymentOptionsLabel',
+  'paymentOptionsText',
 ] as const
 
 interface StorePaymentsProps {
@@ -25,13 +25,13 @@ const StorePaymentOptions: StorefrontFunctionComponent<StorePaymentsProps> = ({
   }
 
   return (
-    <div className={`${handles.storePaymentOptionsContainer} mh7`}>
+    <div className={`${handles.paymentOptionsContainer} mh7`}>
       {label && (
-        <div className={`${handles.storePaymentOptionsLabel} b t-heading-6`}>
+        <div className={`${handles.paymentOptionsLabel} b t-heading-6`}>
           {label}
         </div>
       )}
-      <div className={`${handles.storePaymentOptionsText} mt4`}>
+      <div className={`${handles.paymentOptionsText} mt4`}>
         {group.paymentOptions.join(', ')}
       </div>
     </div>

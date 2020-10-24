@@ -4,7 +4,7 @@ import { useCssHandles } from 'vtex.css-handles'
 
 import { useStoreGroup } from './StoreGroup'
 
-const CSS_HANDLES = ['storeOpenBanner']
+const CSS_HANDLES = ['openBanner']
 
 const StoreOpenBanner: StorefrontFunctionComponent = () => {
   const handles = useCssHandles(CSS_HANDLES)
@@ -21,7 +21,7 @@ const StoreOpenBanner: StorefrontFunctionComponent = () => {
   return (
     <Fragment>
       {closingTime && (
-        <div className={`${handles.storeOpenBanner} tc t-heading-4 mt7 mb4`}>
+        <div className={`${handles.openBanner} tc t-heading-4 mt7 mb4`}>
           Open Today Until {closingTime}
         </div>
       )}

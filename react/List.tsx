@@ -132,7 +132,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
           <div
             className={`flex-grow-1 order-2-m order-1-s ${handles.storesMapCol}`}
           >
-            {latitude && longitude && (
+            {latitude !== 0 && (
               <Pinpoints
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleMapsKeys.logistics.googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}

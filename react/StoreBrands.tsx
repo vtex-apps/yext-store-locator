@@ -5,10 +5,10 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useStoreGroup } from './StoreGroup'
 
 const CSS_HANDLES = [
-  'storeBrandsContainer',
-  'storeBrandsLabel',
-  'storeBrandsList',
-  'storeBrandsItem',
+  'brandsContainer',
+  'brandsLabel',
+  'brandsList',
+  'brandsItem',
 ] as const
 
 interface StoreBrandsProps {
@@ -26,21 +26,19 @@ const StoreBrands: StorefrontFunctionComponent<StoreBrandsProps> = ({
   }
 
   return (
-    <div className={handles.storeBrandsContainer}>
+    <div className={handles.brandsContainer}>
       {label && (
-        <div className={`${handles.storeBrandsLabel} b t-heading-6`}>
-          {label}
-        </div>
+        <div className={`${handles.brandsLabel} b t-heading-6`}>{label}</div>
       )}
       <div>
         <ul
-          className={`${handles.storeBrandsList}`}
+          className={`${handles.brandsList}`}
           style={{ columnCount: 3, padding: 0 }}
         >
           {group.brands.map((brand, i) => (
             <li
               key={i}
-              className={handles.storeBrandsItem}
+              className={handles.brandsItem}
               style={{ listStyle: 'none' }}
             >
               {brand}

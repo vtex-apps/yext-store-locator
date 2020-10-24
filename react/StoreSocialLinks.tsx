@@ -5,12 +5,12 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useStoreGroup } from './StoreGroup'
 
 const CSS_HANDLES = [
-  'storeSocialLinksBlock',
-  'storeSocialLinksHeader',
-  'storeSocialLinksTitle',
-  'storeSocialLinksSubtitle',
-  'storeSocialLinksContainer',
-  'storeSocialLinkTag',
+  'socialLinksBlock',
+  'socialLinksHeader',
+  'socialLinksTitle',
+  'socialLinksSubtitle',
+  'socialLinksContainer',
+  'socialLinkTag',
 ] as const
 
 interface StoreSocialProps {
@@ -43,25 +43,25 @@ const StoreSocialLinks: StorefrontFunctionComponent<StoreSocialProps> = ({
 
   return (
     <div
-      className={`${handles.storeSocialLinksBlock} flex flex-column justify-center items-center ma6`}
+      className={`${handles.socialLinksBlock} flex flex-column justify-center items-center ma6`}
     >
       {(title || subtitle) && (
         <div
-          className={`${handles.storeSocialLinksHeader} flex flex-column justify-center items-center`}
+          className={`${handles.socialLinksHeader} flex flex-column justify-center items-center`}
         >
-          <div className={handles.storeSocialLinksTitle}>{title}</div>
-          <div className={handles.storeSocialLinksSubtitle}>{subtitle}</div>
+          <div className={handles.socialLinksTitle}>{title}</div>
+          <div className={handles.socialLinksSubtitle}>{subtitle}</div>
         </div>
       )}
-      <div className={`${handles.storeSocialLinksContainer} flex`}>
+      <div className={`${handles.socialLinksContainer} flex`}>
         {facebookPageUrl && (
-          <a className={handles.storeSocialLinkTag} href={facebookPageUrl}>
+          <a className={handles.socialLinkTag} href={facebookPageUrl}>
             {facebookLabel}
           </a>
         )}
         {twitterHandle && (
           <a
-            className={`${handles.storeSocialLinkTag} ml5`}
+            className={`${handles.socialLinkTag} ml5`}
             href={`https://twitter.com/${twitterHandle}`}
           >
             <div>{twitterLabel}</div>
@@ -69,7 +69,7 @@ const StoreSocialLinks: StorefrontFunctionComponent<StoreSocialProps> = ({
         )}
         {youTubeHandle && (
           <a
-            className={`${handles.storeSocialLinkTag} ml5`}
+            className={`${handles.socialLinkTag} ml5`}
             href={`https://www.youtube.com/user/${youTubeHandle}`}
           >
             <div>{youTubeLabel}</div>
@@ -77,7 +77,7 @@ const StoreSocialLinks: StorefrontFunctionComponent<StoreSocialProps> = ({
         )}
         {instagramHandle && (
           <a
-            className={`${handles.storeSocialLinkTag} ml5`}
+            className={`${handles.socialLinkTag} ml5`}
             href={`https://www.instagram.com/${instagramHandle}`}
           >
             <div>{instagramLabel}</div>
