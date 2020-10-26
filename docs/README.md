@@ -10,7 +10,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- DOCS-IGNORE:end -->
 
-The Yext Store Locator app provides a way to bring in loction data from the Yext Live API and create a store locator map, as well as, individual store pages for each location.
+The Yext Store Locator app provides a way to bring in location data from the Yext Live API and create a store locator map, as well as, individual store pages for each location.
 
 ## Configuration
 
@@ -29,7 +29,7 @@ In your VTEX account's admin, perform the following actions:
 
 ### Step 3 - Adding the locations map and store pages
 
-Before performing the following actions, make sure you already are logged into the desired VTEX account and working on a [Developer workspace](https://vtex.io/docs/recipes/development/creating-a-development-workspace/).
+Before performing the following actions, make sure you are already logged into the desired VTEX account and working on a [Developer workspace](https://vtex.io/docs/recipes/development/creating-a-development-workspace/).
 
 1. Open your Store Theme app in your code editor.
 2. Add the `yext-store-locator` app as a `peerDependency` in your theme's `manifest.json` file:
@@ -40,66 +40,150 @@ Before performing the following actions, make sure you already are logged into t
  }
 ```
 
-| Store page           | Description                                                                                     |
-| -------------------- | ----------------------------------------------------------------------------------------------- |
-| `store.storelocator` | Provides a listing of your store locations along with a map and markers for the store locations |
-| `store.storedetail`  | A context component that provides data for an individual store page's child blocks.             |
+3. In the `store/routes.json` file, create paths for the store locator pages as shown below:
+
+```json
+"store.storelocator": {
+	"path": "/stores"
+},
+"store.storedetail": {
+	"path": "/store/:slug/:store_id"
+}
+```
+
+| Store page           | Description                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| `store.storelocator` | Provides a listing of your store locations along with a map and markers for the each store location |
+| `store.storedetail`  | A detail view of a single store location.                                                           |
 
 ### Step 4 - Declaring the pages' blocks
 
 The Yext Store Locator app provides the following blocks for your use:
 
-| Block name               | Description                                                                                                                                                                                        |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `store-address`          | Show the store address                                                                                                                                                                             |
-| `store-back-link`        | Display a link to navigate back to the store locator map                                                                                                                                           |
-| `store-brands`           | Show a list of brands available at the store                                                                                                                                                       |
-| `store-conditional`      | A wrapper component that will only render its child blocks if the passed in custom data prop returns content. Used in cases where custom data may be used in some locations, but absent in others. |
-| `store-contact`          | Show store contact information.                                                                                                                                                                    |
-| `store-custom-data`      | Show a custom data field from your Yext location                                                                                                                                                   |
-| `store-description`      | Show the store description                                                                                                                                                                         |
-| `store-group`            | A context component that provides data for the store page's child blocks.                                                                                                                          |
-| `store-hours`            | Show the store hours. .                                                                                                                                                                            |
-| `store-list`             | List of stores that are displayed on the map.                                                                                                                                                      |
-| `store-logo`             | Show the store logo.                                                                                                                                                                               |
-| `store-map`              | Map component that displays markers for each store in the `store-list`                                                                                                                             |
-| `store-nearby-locations` | Used on the store page to display nearby stores.                                                                                                                                                   |
-| `store-open-banner`      | Banner to display the open until time for the current day.                                                                                                                                         |
-| `store-page-banner`      | Banner component that can be customized with store data.                                                                                                                                           |
-| `store-payment-options`  | Show the payment options available as the store.                                                                                                                                                   |
-| `store-social-links`     | Show the stores social media links.                                                                                                                                                                |
-| `store-title`            | Title block that contains the stores name and location.                                                                                                                                            |
+| Block name               | Description                                                                                                                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `store-address`          | Show the store address.                                                                                                                                                                                       |
+| `store-back-link`        | Display a link to navigate back to the store locator map.                                                                                                                                                     |
+| `store-brands`           | Show a list of brands available at the store.                                                                                                                                                                 |
+| `store-conditional`      | A wrapper component that will only render its child blocks if the passed in custom data field returns content. Should be used in cases where custom data may be used in some locations, but absent in others. |
+| `store-contact`          | Show store contact information.                                                                                                                                                                               |
+| `store-custom-data`      | Show a custom data field from your Yext location.                                                                                                                                                             |
+| `store-description`      | Show the store description.                                                                                                                                                                                   |
+| `store-group`            | A context component that provides data for the store page's child blocks.                                                                                                                                     |
+| `store-hours`            | Show the store hours.                                                                                                                                                                                         |
+| `store-list`             | List of stores that are displayed on the map.                                                                                                                                                                 |
+| `store-logo`             | Show the store logo.                                                                                                                                                                                          |
+| `store-map`              | Map component to be used on the store detail page. Shows the viewed store's location.                                                                                                                         |
+| `store-nearby-locations` | Used on the store page to display nearby stores.                                                                                                                                                              |
+| `store-open-banner`      | Banner to display the open until time for the current day.                                                                                                                                                    |
+| `store-page-banner`      | Banner component that can be customized with store data. Including the placeholders `{storeName}` or `{storeCity}` in the banner text, will be resolved to the locations values.                              |
+| `store-payment-options`  | Show the payment options available at the store.                                                                                                                                                              |
+| `store-social-links`     | Show the stores social media links.                                                                                                                                                                           |
+| `store-title`            | Title block that contains the stores name and location.                                                                                                                                                       |
 
-### `block-1` props
+### `store-list` props
 
-| Prop name | Type     | Description | Default value |
-| --------- | -------- | ----------- | ------------- |
-| `XXXXX`   | `XXXXXX` | XXXXXXXX    | `XXXXXX`      |
+| Prop name    | Type     | Description                                                                                                   | Default value |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------- | ------------- |
+| `icon`       | `string` | Image url (svg or png) to be used as the map location marker icon instead of the default red Google pin icon. | `undefined`   |
+| `iconWidth`  | `number` | If a custom icon is used, a fixed width number in pixels can be set                                           | `undefined`   |
+| `iconHeight` | `number` | If a custom icon is used, a fixed height number in pixels can be set                                          | `undefined`   |
 
-### `block-2` props
+### `store-address` props
 
-| Prop name | Type     | Description | Default value |
-| --------- | -------- | ----------- | ------------- |
-| `XXXXX`   | `XXXXXX` | XXXXXXXX    | `XXXXXX`      |
+| Prop name | Type     | Description                            | Default value |
+| --------- | -------- | -------------------------------------- | ------------- |
+| `label`   | `string` | Title to be displayed above the block. | `undefined`   |
 
-Prop types are:
+### `store-back-link` props
 
-- `string`
-- `enum`
-- `number`
-- `boolean`
-- `object`
-- `array`
+| Prop name | Type     | Description                | Default value          |
+| --------- | -------- | -------------------------- | ---------------------- |
+| `label`   | `string` | Link text to be displayed. | `"Back to all stores"` |
 
-When documenting a prop whose type is `object` or `array` another prop table will be needed. You can create it following the example below:
+### `store-brands` props
 
-- `propName` object:
+| Prop name | Type     | Description                            | Default value |
+| --------- | -------- | -------------------------------------- | ------------- |
+| `label`   | `string` | Title to be displayed above the block. | `undefined`   |
 
-| Prop name | Type     | Description | Default value |
-| --------- | -------- | ----------- | ------------- |
-| `XXXXX`   | `XXXXXX` | XXXXXXXX    | `XXXXXX`      |
+### `store-conditional` props
 
-Remember to also use this Configuration section to **showcase any necessary disclaimer** related to the app and its blocks, such as the different behavior it may display during its configuration.
+| Prop name | Type                                                 | Description                                                                                                                                | Default value |
+| --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| `id`      | `string`                                             | `The name of the custom data field to be used in the conditional block, include the`c\_`prefix Yext adds to your custom data field names.` | `undefined`   |
+| `type`    | `text`&#124;`textList`&#124;`image`&#124;`imageList` | Custom field data type                                                                                                                     | `undefined`   |
+
+### `store-contact` props
+
+| Prop name | Type                                | Description                                                                                                                                                | Default value |
+| --------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `label`   | `string`                            | Label to be displayed below the contact.                                                                                                                   | `undefined`   |
+| `type`    | `mainPhone`&#124;`fax`&#124;`email` | Contact type as defined in your Yext data.                                                                                                                 | `undefined`   |
+| `index`   | `number`                            | If type `email` and there are multiple emails associated in your Yext location, an index must be specified. The first email is used by default, index `0`. | `0`           |
+
+### `store-custom-data` props
+
+| Prop name | Type                                                 | Description                                                                                                                                                             | Default value |
+| --------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `label`   | `string`                                             | Title to be displayed above the block.                                                                                                                                  | `undefined`   |
+| `id`      | `string`                                             | The name of your Yext custom field. Include the`c\_`prefix Yext adds to your custom data field names.                                                                   | `undefined`   |
+| `type`    | `text`&#124;`textList`&#124;`image`&#124;`imageList` | The custom field data type. `text` or `image` when the data field is a single string or image. `textList` or `imageList` when the custom data contains a list of items. | `undefined`   |
+| `altText` | `string`                                             | If type `image` or `imageList`, this is the alt text that will display                                                                                                  | `undefined`   |
+
+### `store-description` props
+
+| Prop name | Type     | Description                            | Default value |
+| --------- | -------- | -------------------------------------- | ------------- |
+| `label`   | `string` | Title to be displayed above the block. | `undefined`   |
+
+### `store-hours` props
+
+| Prop name | Type     | Description                            | Default value |
+| --------- | -------- | -------------------------------------- | ------------- |
+| `label`   | `string` | Title to be displayed above the block. | `undefined`   |
+
+### `store-logo` props
+
+| Prop name | Type     | Description           | Default value |
+| --------- | -------- | --------------------- | ------------- |
+| `width`   | `string` | Logo container width  | `300px`       |
+| `height`  | `string` | Logo container height | `300px`       |
+
+### `store-map` props
+
+| Prop name    | Type     | Description                                                                                                   | Default value |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------- | ------------- |
+| `width`      | `string` | Map container width                                                                                           | `undefined`   |
+| `height`     | `string` | Map container height                                                                                          | `undefined`   |
+| `icon`       | `string` | Image url (svg or png) to be used as the map location marker icon instead of the default red Google pin icon. | `undefined`   |
+| `iconWidth`  | `number` | If a custom icon is used, a fixed width number in pixels can be set                                           | `undefined`   |
+| `iconHeight` | `number` | If a custom icon is used, a fixed height number in pixels can be set                                          | `undefined`   |
+
+### `store-page-banner` props
+
+| Prop name   | Type     | Description           | Default value |
+| ----------- | -------- | --------------------- | ------------- |
+| `header`    | `string` | Header banner text    | `undefined`   |
+| `subheader` | `string` | Subheader banner text | `undefined`   |
+
+### `store-payment-options` props
+
+| Prop name | Type     | Description                            | Default value |
+| --------- | -------- | -------------------------------------- | ------------- |
+| `label`   | `string` | Title to be displayed above the block. | `undefined`   |
+
+### `store-social-links` props
+
+| Prop name        | Type     | Description                                                 | Default value |
+| ---------------- | -------- | ----------------------------------------------------------- | ------------- |
+| `title`          | `string` | Title to be displayed above the block.                      | `undefined`   |
+| `subtitle`       | `string` | Subtitle to be displayed below of the block title.          | `undefined`   |
+| `facebookLabel`  | `string` | Facebook link text                                          | `undefined`   |
+| `twitterLabel`   | `string` | Twitter link text                                           | `undefined`   |
+| `instagramLabel` | `string` | Instagram link text                                         | `undefined`   |
+| `youTubeHandle`  | `string` | YouTube handle. Gives the option to include a YouTube link. | `undefined`   |
+| `youTubeLabel`   | `string` | YouTube link text                                           | `undefined`   |
 
 ## Customization
 
