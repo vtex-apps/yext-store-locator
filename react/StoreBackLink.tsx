@@ -18,7 +18,7 @@ const StoreBackLink: StorefrontFunctionComponent<StoreBackLinkProps> = ({
     <div className={handles.backLinkContainer}>
       <Link className={`${handles.backLink}`} page="store.storelocator">
         {label ?? (
-          <FormattedMessage id="store/store-locator-yext.storeBackLink.linkText" />
+          <FormattedMessage id="store/yext-store-locator.storeBackLink.linkText" />
         )}
       </Link>
     </div>

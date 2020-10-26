@@ -49,7 +49,7 @@ const Pinpoints = withScriptjs(
     const messages = defineMessages({
       hoursLabel: {
         defaultMessage: '',
-        id: 'store/hours-label',
+        id: 'store/yext-store-locator.hours-label',
       },
       '0': {
         defaultMessage: '',

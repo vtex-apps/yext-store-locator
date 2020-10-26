@@ -57,11 +57,27 @@ const StoreConditional: StorefrontFunctionComponent<StoreCustomFieldProps> = (
 const messages = defineMessages({
   title: {
     defaultMessage: '',
-    id: 'admin/editor.StoreConditional.title',
+    id: 'admin/editor.storeConditional.title',
   },
   description: {
     defaultMessage: '',
-    id: 'admin/editor.StoreConditional.description',
+    id: 'admin/editor.storeConditional.description',
+  },
+  idTitle: {
+    defaultMessage: '',
+    id: 'admin/editor.storeConditionalId.title',
+  },
+  idDescription: {
+    defaultMessage: '',
+    id: 'admin/editor.storeConditionalId.description',
+  },
+  typeTitle: {
+    defaultMessage: '',
+    id: 'admin/editor.storeConditionalType.title',
+  },
+  typeDescription: {
+    defaultMessage: '',
+    id: 'admin/editor.storeConditionalType.description',
   },
 })
 
@@ -69,7 +85,23 @@ StoreConditional.schema = {
   title: messages.title.id,
   description: messages.description.id,
   type: 'object',
-  properties: {},
+  properties: {
+    id: {
+      title: messages.idTitle.id,
+      description: messages.idDescription.id,
+      type: 'string',
+      isLayout: false,
+      default: '',
+    },
+    type: {
+      title: messages.typeTitle.id,
+      description: messages.typeDescription.id,
+      type: 'string',
+      enum: ['text', 'textList', 'image', 'imageList'],
+      isLayout: false,
+      default: '',
+    },
+  },
 }
 
 export default StoreConditional

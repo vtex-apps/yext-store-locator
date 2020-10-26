@@ -35,7 +35,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
 
   const [search, setSearch] = useState<string>('')
   const [longitude, setLongitude] = useState<number>(0)
-  const [latitude, setlatitude] = useState<number>(0)
+  const [latitude, setLatitude] = useState<number>(0)
   const [update, setUpdate] = useState<boolean>(false)
   const [zoom, setZoom] = useState<number>(6)
 
@@ -55,7 +55,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
 
   const handleCenter = (lon: number, lat: number, zoomSize: number) => {
     setLongitude(lon)
-    setlatitude(lat)
+    setLatitude(lat)
     setZoom(zoomSize)
   }
 
@@ -68,7 +68,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
           const { longitude: lon, latitude: lat } = position.coords
 
           setLongitude(lon)
-          setlatitude(lat)
+          setLatitude(lat)
           loadAll(`${lat},${lon}`)
         },
         () => {
