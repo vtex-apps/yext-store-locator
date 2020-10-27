@@ -23,7 +23,7 @@ const StoreLink: FC<StoreLinkProps> = ({ item }) => {
         slug: `${Slugify(
           `${item.name} ${item.address.state} ${item.address.postalCode}`
         )}`,
-        store_id: String(item.id).replace('1_', ''),
+        store_id: item.id,
       }}
     >
       {`${item.name} - ${item.address.city}`}

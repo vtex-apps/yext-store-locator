@@ -125,7 +125,7 @@ export const resolvers = {
                     return `<url>
                   <loc>https://${ctx.vtex.host}/store/${Slugify(
                       `${item.name} ${item.address.region} ${item.address.postalCode}`
-                    )}/${String(item.meta.id).replace('1_', '')}</loc>
+                    )}/${item.meta.id}</loc>
                   <lastmod>${lastMod}</lastmod>
                   <changefreq>daily</changefreq>
                   <priority>0.8</priority>
