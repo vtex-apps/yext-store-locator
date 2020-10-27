@@ -1,8 +1,8 @@
 // import React from 'react'
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { defineMessages } from 'react-intl'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 interface StoreCustomFieldProps {
   id: string
@@ -12,7 +12,7 @@ interface StoreCustomFieldProps {
 const StoreConditional: StorefrontFunctionComponent<StoreCustomFieldProps> = (
   props
 ) => {
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
   const { id, type } = props
 
   if (!group || !id) {

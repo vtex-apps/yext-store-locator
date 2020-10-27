@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 const CSS_HANDLES = [
   'hoursContainer',
@@ -70,7 +70,7 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
   intl,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   if (!group) {
     return null

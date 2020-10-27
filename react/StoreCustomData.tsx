@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { defineMessages } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { Slider } from 'vtex.store-components'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 const CSS_HANDLES = [
   'customDataTextContainer',
@@ -30,7 +30,7 @@ const StoreCustomData: StorefrontFunctionComponent<StoreCustomFieldProps> = ({
   altText,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   if (!group || !id) {
     return null

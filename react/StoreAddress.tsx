@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { defineMessages, FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 const CSS_HANDLES = [
   'addressContainer',
@@ -20,7 +20,7 @@ const StoreAddress: StorefrontFunctionComponent<StoreAddressProps> = ({
   label,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   if (!group) {
     return null

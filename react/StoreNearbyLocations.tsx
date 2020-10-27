@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLazyQuery } from 'react-apollo'
 import { useCssHandles } from 'vtex.css-handles'
 import { defineMessages } from 'react-intl'
 
 import GET_STORES from './queries/getStores.graphql'
 import StoreLink from './components/StoreLink'
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 import { StoresResult } from './typings/store'
 
 const CSS_HANDLES = [
@@ -20,7 +20,7 @@ const CSS_HANDLES = [
 
 const StoreNearbyLocations: StorefrontFunctionComponent = () => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   const [getStores, { data, loading, called }] = useLazyQuery<StoresResult>(
     GET_STORES

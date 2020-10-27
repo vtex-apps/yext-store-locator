@@ -1,28 +1,11 @@
-import React, { FC, useContext, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { useLazyQuery } from 'react-apollo'
 import { Helmet } from 'react-helmet'
 import { useRuntime } from 'vtex.render-runtime'
 
 import GET_STORE from './queries/getStore.graphql'
-import { SpecificationGroup, StoreResult } from './typings/store'
-
-const StoreGroupContext = React.createContext<SpecificationGroup | undefined>(
-  undefined
-)
-
-interface StoreGroupProviderProps {
-  group: SpecificationGroup | undefined
-}
-const StoreGroupProvider: FC<StoreGroupProviderProps> = ({
-  group,
-  children,
-}) => {
-  return (
-    <StoreGroupContext.Provider value={group}>
-      {children}
-    </StoreGroupContext.Provider>
-  )
-}
+import { StoreResult } from './typings/store'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 interface StoreGroupProps {
   children: ReactNode
@@ -54,17 +37,11 @@ const StoreGroup: StorefrontFunctionComponent<StoreGroupProps> = ({
           </script>
         </Helmet>
       )}
-      <StoreGroupProvider group={data?.getStore.item}>
+      <StoreGroupContext.Provider value={data?.getStore.item}>
         {children}
-      </StoreGroupProvider>
+      </StoreGroupContext.Provider>
     </>
   )
-}
-
-export const useStoreGroup = () => {
-  const group = useContext(StoreGroupContext)
-
-  return group
 }
 
 export default StoreGroup

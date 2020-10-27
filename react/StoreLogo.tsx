@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import React, { useContext } from 'react'
 import { defineMessages } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 const CSS_HANDLES = ['logoContainer'] as const
 
@@ -17,7 +17,7 @@ const StoreLogo: StorefrontFunctionComponent<StoreLogoProps> = ({
   height,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   if (!group) {
     return null

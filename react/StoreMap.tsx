@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import React, { useContext } from 'react'
 import { defineMessages } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { graphql, compose } from 'react-apollo'
 
-import { useStoreGroup } from './StoreGroup'
+import { StoreGroupContext } from './contexts/StoreGroupContext'
 import Map from './components/Map'
 import GOOGLE_KEYS from './queries/GetGoogleMapsKey.graphql'
 
@@ -28,7 +28,7 @@ const StoreMap: StorefrontFunctionComponent<StoreMapProps> = ({
   iconHeight,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const group = useStoreGroup()
+  const group = useContext(StoreGroupContext)
 
   if (!group || !googleMapsKeys?.logistics?.googleMapsKey) {
     return null
