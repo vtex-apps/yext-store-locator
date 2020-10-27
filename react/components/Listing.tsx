@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC } from 'react'
-import { injectIntl, WrappedComponentProps } from 'react-intl'
-import PropTypes from 'prop-types'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React from 'react'
 import slugify from 'slugify'
 import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
+
+import { SpecificationGroup } from '../typings/store'
 
 const CSS_HANDLES = [
   'addressList',
@@ -22,7 +20,12 @@ const Slugify = (str: string) => {
   return slugify(str, { lower: true, remove: /[*+~.()'"!:@]/g })
 }
 
-const Listing: FC<WrappedComponentProps & any> = ({
+interface ListingProps {
+  items: SpecificationGroup[]
+  onChangeCenter: any
+}
+
+const Listing: StorefrontFunctionComponent<ListingProps> = ({
   items,
   onChangeCenter,
 }) => {
@@ -39,7 +42,7 @@ const Listing: FC<WrappedComponentProps & any> = ({
       style={{ minWidth: '270px' }}
       className={`vh-75-m h-100-s overflow-y-scroll-m overflow-visible-s flex flex-column-m flex-nowrap-m order-1-m order-2-s flex-row-s flex-wrap-s t-small ${handles.addressList}`}
     >
-      {items.map((item: any, i: number) => {
+      {items.map((item, i: number) => {
         return (
           <div
             key={`key_${i}`}
@@ -61,7 +64,7 @@ const Listing: FC<WrappedComponentProps & any> = ({
                     slug: `${Slugify(
                       `${item.name} ${item.address.state} ${item.address.postalCode}`
                     )}`,
-                    store_id: String(item.id).replace('1_', ''),
+                    store_id: item.id,
                   }}
                 >
                   {item.address.city}
@@ -108,9 +111,4 @@ const Listing: FC<WrappedComponentProps & any> = ({
   )
 }
 
-Listing.propTypes = {
-  items: PropTypes.array,
-  onChangeCenter: PropTypes.func,
-}
-
-export default injectIntl(Listing)
+export default Listing
