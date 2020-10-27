@@ -26,6 +26,7 @@ interface GeoLocationsArgs {
 }
 
 const API_VERSION = '20201001'
+const CLOSED_STORES_FILTER = '%7B%22closed%22%3A%7B%22%24eq%22%3Afalse%7D%7D'
 
 export default class Yext extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
@@ -51,7 +52,7 @@ export default class Yext extends ExternalClient {
     pageToken,
   }: GetLocationsArgs): Promise<EntityListApi> {
     const withPageToken = pageToken ? `&pageToken=${pageToken}` : ''
-    const endpoint = `/v2/accounts/me/entities?api_key=${apiKey}&v=${API_VERSION}&entityTypes=location&limit=${limit}${withPageToken}`
+    const endpoint = `/v2/accounts/me/entities?api_key=${apiKey}&v=${API_VERSION}&entityTypes=location&filter=${CLOSED_STORES_FILTER}&limit=${limit}${withPageToken}`
 
     return this.http.get(endpoint)
   }
