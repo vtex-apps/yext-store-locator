@@ -3,6 +3,7 @@
   "store/yext-store-locator.storeBackLink.linkText": "Back to all stores",
   "store/yext-store-locator.storeHours.label": "Store Hours",
   "store/yext-store-locator.pinpoints.directions": "Get Directions",
+  "store/yext-store-locator.storeUberLink.linkText": "Get a Ride",
   "store/yext-store-locator.day-of-week-sunday": "Sunday",
   "store/yext-store-locator.day-of-week-monday": "Monday",
   "store/yext-store-locator.day-of-week-tuesday": "Tuesday",
@@ -103,5 +104,7 @@
   "admin/editor.StoreSocialLinksYouTubeHandle.description": "Display YouTube link to specified YouTube handle",
   "admin/editor.StoreTitle.title": "Store Title",
   "admin/editor.StoreTitle.description": "Title block displaying store name and location",
-  "store/yext-store-locator.hours-label": "Store hours"
+  "store/yext-store-locator.hours-label": "Store hours",
+  "admin/editor.storeUberLink.title": "Uber Link",
+  "admin/editor.storeUberLink.description": "Display a link to open the location in the Uber app"
 }

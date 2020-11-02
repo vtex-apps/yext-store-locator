@@ -307,5 +307,26 @@ export const resolvers = {
 
       return location
     },
+    getUberLink: async (_: any, param: any, ctx: Context) => {
+      const { locationId } = param
+      const {
+        clients: { apps, yext },
+      } = ctx
+
+      const appId = process.env.VTEX_APP_ID as string
+      const settings = await apps.getAppSettings(appId)
+      const { apiKey } = settings
+
+      const { response } = await yext.getUberLink({
+        apiKey,
+        locationId,
+      })
+
+      if (!response) {
+        return null
+      }
+
+      return response
+    },
   },
 }

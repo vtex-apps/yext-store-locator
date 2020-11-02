@@ -1,0 +1,5 @@
+query getUberLink($locationId: String!) {
+  getUberLink(locationId: $locationId) {
+    uberLink
+  }
+}

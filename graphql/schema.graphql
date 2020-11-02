@@ -8,6 +8,9 @@ type Query {
 
   getAllStores(locationId: String): AllStoreResponse
     @cacheControl(scope: PRIVATE)
+
+  getUberLink(locationId: String): UberLinkResponse
+    @cacheControl(scope: PRIVATE)
 }
 
 type StoreSchema {
@@ -25,6 +28,11 @@ type StoreResponse {
 type AllStoreResponse {
   item: [StoreItemType]
 }
+
+type UberLinkResponse {
+  uberLink: String
+}
+
 type StoreItemType {
   id: String
   name: String

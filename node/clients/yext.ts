@@ -74,4 +74,13 @@ export default class Yext extends ExternalClient {
 
     return this.http.get(endpoint)
   }
+
+  public async getUberLink({
+    apiKey,
+    locationId,
+  }: GetLocationArgs): Promise<{ response: { uberLink: string } }> {
+    const endpoint = `/v2/accounts/me/locations/${locationId}?api_key=${apiKey}&v=${API_VERSION}&fields=uberLink&resolvePlaceHolders=true`
+
+    return this.http.get(endpoint)
+  }
 }

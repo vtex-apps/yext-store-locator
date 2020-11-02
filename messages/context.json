@@ -3,6 +3,7 @@
   "store/yext-store-locator.storeBackLink.linkText": "store/yext-store-locator.storeBackLink.linkText",
   "store/yext-store-locator.storeHours.label": "store/yext-store-locator.storeHours.label",
   "store/yext-store-locator.pinpoints.directions": "store/yext-store-locator.pinpoints.directions",
+  "store/yext-store-locator.storeUberLink.linkText": "store/yext-store-locator.storeUberLink.linkText",
   "store/yext-store-locator.day-of-week-sunday": "store/yext-store-locator.day-of-week-sunday",
   "store/yext-store-locator.day-of-week-monday": "store/yext-store-locator.day-of-week-monday",
   "store/yext-store-locator.day-of-week-tuesday": "store/yext-store-locator.day-of-week-tuesday",
@@ -103,5 +104,7 @@
   "admin/editor.StoreSocialLinksYouTubeHandle.title": "admin/editor.StoreSocialLinksYouTubeHandle.title",
   "admin/editor.StoreSocialLinksYouTubeHandle.description": "admin/editor.StoreSocialLinksYouTubeHandle.description",
   "admin/editor.StoreTitle.title": "admin/editor.StoreTitle.title",
-  "admin/editor.StoreTitle.description": "admin/editor.StoreTitle.description"
+  "admin/editor.StoreTitle.description": "admin/editor.StoreTitle.description",
+  "admin/editor.storeUberLink.title": "admin/editor.storeUberLink.title",
+  "admin/editor.storeUberLink.description": "admin/editor.storeUberLink.description"
 }

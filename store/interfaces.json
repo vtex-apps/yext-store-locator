@@ -70,6 +70,10 @@
     "component": "StoreTitle",
     "composition": "children"
   },
+  "store-uber-link": {
+    "component": "StoreUberLink",
+    "composition": "children"
+  },
   "store.storelocator": {},
   "store.storedetail": {}
 }
