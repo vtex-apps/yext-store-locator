@@ -25,7 +25,7 @@ const StorePaymentOptions: StorefrontFunctionComponent<StorePaymentsProps> = ({
   }
 
   return (
-    <div className={`${handles.paymentOptionsContainer} mh7`}>
+    <div className={`${handles.paymentOptionsContainer} mb7`}>
       {label && (
         <div className={`${handles.paymentOptionsLabel} b t-heading-6`}>
           {label}

@@ -21,7 +21,7 @@ const StoreOpenBanner: StorefrontFunctionComponent = () => {
   return (
     <Fragment>
       {closingTime && (
-        <div className={`${handles.openBanner} tc t-heading-4 mt7 mb4`}>
+        <div className={`${handles.openBanner} tc t-heading-4 mb7`}>
           Open Today Until {closingTime}
         </div>
       )}

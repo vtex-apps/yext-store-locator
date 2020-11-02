@@ -26,7 +26,7 @@ const StoreBrands: StorefrontFunctionComponent<StoreBrandsProps> = ({
   }
 
   return (
-    <div className={handles.brandsContainer}>
+    <div className={`${handles.brandsContainer} mb7`}>
       {label && (
         <div className={`${handles.brandsLabel} b t-heading-6`}>{label}</div>
       )}
@@ -39,7 +39,6 @@ const StoreBrands: StorefrontFunctionComponent<StoreBrandsProps> = ({
             <li
               key={i}
               className={handles.brandsItem}
-              style={{ listStyle: 'none' }}
             >
               {brand}
             </li>
