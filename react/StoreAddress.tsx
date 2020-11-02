@@ -32,7 +32,6 @@ const StoreAddress: StorefrontFunctionComponent<StoreAddressProps> = ({
     <div className={`${handles.addressContainer} mv5 flex items-center`}>
       <div className={`${handles.addressBlock} t-body`}>
         {label && <div className={`${handles.addressLabel} b`}>{label}</div>}
-        <br />
         {number ? `${number} ` : ''}
         {street ? `${street} ` : ''}
         <br />

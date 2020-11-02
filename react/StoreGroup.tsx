@@ -31,7 +31,9 @@ const StoreGroup: StorefrontFunctionComponent<StoreGroupProps> = ({
     <>
       {data && (
         <Helmet>
-          <title>{data.getStore.item.name}</title>
+          <title>
+            {data.getStore.item.name} - {data.getStore.item.address.city}
+          </title>
           <script type="application/ld+json">
             {data.getStoreSchema.response}
           </script>
