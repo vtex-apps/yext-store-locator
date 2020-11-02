@@ -61,7 +61,7 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
           className={`${handles.nearbyLocationsContainer} flex items-center justify-center`}
         >
           {data.getStores.items.map((item, i) => (
-            <div className={`${handles.nearbyLocationsItem} ma6`} key={i}>
+            <div className={`${handles.nearbyLocationsItem} mb6 mh6`} key={i}>
               <StoreLink item={item} />
 
               <span className={`${handles.nearbyLocationsAddress} t-small`}>
@@ -81,7 +81,7 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
                     {item.mainPhone}
                   </a>
                 </div>
-                <div className="ml5">
+                <div className="b">
                   <a
                     className={handles.nearbyLocationsLink}
                     href={item.googleMapLink}
