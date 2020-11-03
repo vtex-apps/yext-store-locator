@@ -8,12 +8,18 @@ import { useCssHandles } from 'vtex.css-handles'
 import { SpecificationGroup } from '../typings/store'
 
 const CSS_HANDLES = [
-  'addressList',
-  'addressListItem',
-  'addressListFirstItem',
-  'addressStoreName',
-  'addressStoreAddress',
-  'addressListLink',
+  'storeListAddressList',
+  'storeListAddressListFirstItem',
+  'storeListAddressListItem',
+  'storeListStoreLinkContainer',
+  'storeListStoreLink',
+  'storeListAddressContainer',
+  'storeListStoreName',
+  'storeListAddress',
+  'storeListLinks',
+  'storeListLinkContainer',
+  'storeListPhoneLink',
+  'storeListDirectionsLink',
 ] as const
 
 const Slugify = (str: string) => {
@@ -40,15 +46,15 @@ const Listing: StorefrontFunctionComponent<ListingProps> = ({
   return (
     <div
       style={{ minWidth: '270px' }}
-      className={`vh-75-m h-100-s overflow-y-scroll-m overflow-visible-s flex flex-column-m flex-nowrap-m order-1-m order-2-s flex-row-s flex-wrap-s t-small ${handles.addressList}`}
+      className={`${handles.storeListAddressList} vh-75-m h-100-s overflow-y-scroll-m overflow-visible-s flex flex-column-m flex-nowrap-m order-1-m order-2-s flex-row-s flex-wrap-s t-small`}
     >
       {items.map((item, i: number) => {
         return (
           <div
             key={`key_${i}`}
-            className={`mb0 ph3 pv5 ${!i ? handles.addressListFirstItem : ''} ${
-              handles.addressListItem
-            } ${
+            className={`mb0 ph3 pv5 ${
+              !i ? handles.storeListAddressListFirstItem : ''
+            } ${handles.storeListAddressListItem} ${
               !i ? 'bt' : ''
             } bb bl br b--light-gray hover-bg-near-white w-100-s`}
             onClick={() => {
@@ -56,9 +62,9 @@ const Listing: StorefrontFunctionComponent<ListingProps> = ({
             }}
           >
             <div className="mr3">
-              <div className="mb3">
+              <div className={`${handles.storeListStoreLinkContainer} mb3`}>
                 <Link
-                  className="b no-underline underline-hover"
+                  className={`${handles.storeListStoreLink} b no-underline underline-hover vtex-link`}
                   page="store.storedetail"
                   params={{
                     slug: `${Slugify(
@@ -71,9 +77,11 @@ const Listing: StorefrontFunctionComponent<ListingProps> = ({
                 </Link>
               </div>
 
-              <div>
-                <div className="mb3 fw5">{item.name}</div>
-                <div>
+              <div className={`${handles.storeListAddressContainer}`}>
+                <div className={`${handles.storeListStoreName} mb3 fw5`}>
+                  {item.name}
+                </div>
+                <div className={`${handles.storeListAddress}`}>
                   {item.address.number ? `${item.address.number} ` : ''}
                   {item.address.street ? `${item.address.street}` : ''}
                   <br />
@@ -85,19 +93,23 @@ const Listing: StorefrontFunctionComponent<ListingProps> = ({
                   }`}
                 </div>
               </div>
-              <div className="flex mt3">
-                <div className="pr4 br b--gray">
+              <div className={`${handles.storeListLinks} flex mt3`}>
+                <div
+                  className={`${handles.storeListLinkContainer} pr4 br b--gray`}
+                >
                   <a
-                    className="no-underline underline-hover"
+                    className={`${handles.storeListPhoneLink} no-underline underline-hover vtex-link`}
                     href={`tel:${item.mainPhone}`}
                   >
                     {item.mainPhone}
                   </a>
                 </div>
-                <div className="pl4 bl b--gray">
+                <div
+                  className={`${handles.storeListLinkContainer} pl4 bl b--gray`}
+                >
                   <a
                     href={item.googleMapLink}
-                    className="b no-underline underline-hover"
+                    className={`${handles.storeListDirectionsLink} b no-underline underline-hover vtex-link`}
                   >
                     Directions
                   </a>

@@ -22,9 +22,14 @@ const Slugify = (str: string) => {
 
 const CSS_HANDLES = [
   'markerInfo',
+  'markerInfoLinkContainer',
+  'markerInfoLink',
+  'markerInfoAddressStreet',
+  'markerInfoAddress',
+  'markerInfoHours',
+  'markerInfoDirectionsLink',
   'markerInfoStoreName',
   'markerInfoAddress',
-  'markerInfoLink',
 ] as const
 
 interface PinpointProps {
@@ -148,7 +153,7 @@ const Pinpoints = withScriptjs(
                   }}
                 >
                   <div className={`t-mini ${handles.markerInfo}`}>
-                    <div>
+                    <div className={`${handles.markerInfoLinkContainer}`}>
                       <span
                         className={`mt2 link c-link underline-hover pointer ${handles.markerInfoLink}`}
                         onClick={(e) => {
@@ -160,11 +165,11 @@ const Pinpoints = withScriptjs(
                       </span>
                     </div>
                     <br />
-                    <div>
+                    <div className={handles.markerInfoAddressStreet}>
                       {item.address.number ? `${item.address.number} ` : ''}
                       {`${item.address.street},`}
                     </div>
-                    <div>
+                    <div className={handles.markerInfoAddress}>
                       {item.address.city ? `${item.address.city}` : ''}
                       {item.address.state ? `, ${item.address.state}` : ''}
                       {item.address.postalCode
@@ -176,7 +181,10 @@ const Pinpoints = withScriptjs(
                     <br />
                     {item.businessHours.map((hours, index: number) => {
                       return (
-                        <div key={`hour_${index}`} className="">
+                        <div
+                          key={`hour_${index}`}
+                          className={handles.markerInfoHours}
+                        >
                           <span className="">
                             {intl.formatMessage(messages[hours.dayOfWeek])}
                           </span>
@@ -186,7 +194,10 @@ const Pinpoints = withScriptjs(
                       )
                     })}
                     <br />
-                    <a className="" href={item.googleMapLink}>
+                    <a
+                      className={`${handles.markerInfoDirectionsLink} vtex-link`}
+                      href={item.googleMapLink}
+                    >
                       <FormattedMessage id="store/yext-store-locator.pinpoints.directions" />
                     </a>
                   </div>

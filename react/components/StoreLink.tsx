@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import slugify from 'slugify'
+import { useCssHandles } from 'vtex.css-handles'
 import { Link, useRuntime } from 'vtex.render-runtime'
 
 import { SpecificationGroup } from '../typings/store'
@@ -11,12 +12,15 @@ const Slugify = (str: string) => {
   return slugify(str, { lower: true, remove: /[*+~.()'"!:@]/g })
 }
 
+const CSS_HANDLES = ['storeLink'] as const
+
 const StoreLink: FC<StoreLinkProps> = ({ item }) => {
   const { location } = useRuntime()
+  const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <Link
-      className="b no-underline underline-hover"
+      className={`${handles.storeLink} b no-underline underline-hover vtex-link`}
       page="store.storedetail"
       onClick={() => location.reload()}
       params={{

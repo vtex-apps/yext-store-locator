@@ -16,7 +16,8 @@ const CSS_HANDLES = [
   'nearbyLocationsItem',
   'nearbyLocationsAddress',
   'nearbyLocationsLinkContainer',
-  'nearbyLocationsLink',
+  'nearbyLocationsPhoneLink',
+  'nearbyLocationsDirectionsLink',
 ] as const
 
 const StoreNearbyLocations: StorefrontFunctionComponent = () => {
@@ -73,7 +74,7 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
               >
                 <div className="mr6">
                   <a
-                    className={handles.nearbyLocationsLink}
+                    className={`${handles.nearbyLocationsPhoneLink} vtex-link`}
                     href={`tel:${item.mainPhone}`}
                   >
                     {item.mainPhone}
@@ -81,7 +82,7 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
                 </div>
                 <div className="b">
                   <a
-                    className={handles.nearbyLocationsLink}
+                    className={`${handles.nearbyLocationsDirectionsLink} vtex-link`}
                     href={item.googleMapLink}
                   >
                     Get Directions

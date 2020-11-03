@@ -13,13 +13,13 @@ import Listing from './components/Listing'
 import Pinpoints from './components/Pinpoints'
 
 const CSS_HANDLES = [
-  'container',
-  'storesListCol',
-  'storesList',
-  'storesMapCol',
-  'noResults',
-  'listingMapContainer',
-  'loadAll',
+  'storeLocatorBlock',
+  'storeLocatorsearchContainer',
+  'storeLocatorsearchInput',
+  'storeLocatorsearchSpinner',
+  'storeLocatorContainer',
+  'storeLocatorMapContainer',
+  'storeLocatorMap',
 ] as const
 
 const StoreList: StorefrontFunctionComponent<any> = ({
@@ -80,7 +80,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
     }
   }
 
-  if (called && googleMapsKeys) {
+  if (called && googleMapsKeys?.logistics?.googleMapsKey) {
     if (!loading && data?.getStores.items.length === 0) {
       loadAll('')
     }
@@ -107,9 +107,14 @@ const StoreList: StorefrontFunctionComponent<any> = ({
     const stores = data?.getStores?.items ?? []
 
     return (
-      <div className="mv5">
-        <div className="flex items-center mb5">
-          <div style={{ width: '400px' }}>
+      <div className={`${handles.storeLocatorBlock} mv5`}>
+        <div
+          className={`${handles.storeLocatorsearchContainer} flex items-center mb5`}
+        >
+          <div
+            className={`${handles.storeLocatorsearchInput}`}
+            style={{ width: '400px' }}
+          >
             <InputSearch
               placeholder="Search City, State or Zip"
               value={search}
@@ -123,14 +128,16 @@ const StoreList: StorefrontFunctionComponent<any> = ({
               }}
             />
           </div>
-          <div className="ml6">{loading && <Spinner size={20} />}</div>
+          <div className={`${handles.storeLocatorsearchSpinner} ml6`}>
+            {loading && <Spinner size={20} />}
+          </div>
         </div>
         <div
-          className={`flex flex-row-m flex-nowrap-m flex-column-s flex-wrap-s ${handles.container}`}
+          className={`${handles.storeLocatorContainer} flex flex-row-m flex-nowrap-m flex-column-s flex-wrap-s`}
         >
           <Listing items={stores} onChangeCenter={handleCenter} />
           <div
-            className={`flex-grow-1 order-2-m order-1-s ${handles.storesMapCol}`}
+            className={`${handles.storeLocatorMapContainer} flex-grow-1 order-2-m order-1-s`}
           >
             {latitude !== 0 && (
               <Pinpoints
@@ -138,7 +145,7 @@ const StoreList: StorefrontFunctionComponent<any> = ({
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={
                   <div
-                    className={handles.listingMapContainer}
+                    className={handles.storeLocatorMap}
                     style={{ height: `100%` }}
                   />
                 }
