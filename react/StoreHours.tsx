@@ -1,12 +1,20 @@
 import React, { useContext } from 'react'
-import { defineMessages, FormattedMessage, injectIntl } from 'react-intl'
+import {
+  defineMessages,
+  FormattedDate,
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
 import { StoreGroupContext } from './contexts/StoreGroupContext'
 
 const CSS_HANDLES = [
   'hoursContainer',
+  'normalHours',
+  'holidayHours',
   'hoursLabel',
+  'holidayHoursLabel',
   'hoursRow',
   'hoursDayOfWeek',
   'hoursText',
@@ -78,26 +86,57 @@ const StoreHours: StorefrontFunctionComponent<StoreHoursProps> = ({
 
   return (
     <div className={`${handles.hoursContainer} mh5`}>
-      <div className={`b mb5 t-heading-6 ${handles.hoursLabel}`}>
-        {label ?? (
-          <FormattedMessage id="store/yext-store-locator.storeHours.label" />
-        )}
-      </div>
-      <div>
-        {group.businessHours.map((hours, i) => {
-          return (
-            <div
-              key={`hour_${i}`}
-              className={`${handles.hoursRow} mv2 flex justify-between`}
-            >
-              <div className={handles.hoursDayOfWeek}>
-                {intl.formatMessage(messages[hours.dayOfWeek])}
+      <div className={handles.normalHours}>
+        <div className={`b mb5 t-heading-6 ${handles.hoursLabel}`}>
+          {label ?? (
+            <FormattedMessage id="store/yext-store-locator.storeHours.label" />
+          )}
+        </div>
+        <div>
+          {group.businessHours.map((hours, i) => {
+            return (
+              <div
+                key={`hour_${i}`}
+                className={`${handles.hoursRow} mv2 flex justify-between`}
+              >
+                <div className={handles.hoursDayOfWeek}>
+                  {intl.formatMessage(messages[hours.dayOfWeek])}
+                </div>
+                <div className={handles.hoursText}>{hours.hoursDisplay}</div>
               </div>
-              <div className={handles.hoursText}>{hours.hoursDisplay}</div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
+
+      {group.holidayHours?.length > 0 && (
+        <div className={handles.holidayHours}>
+          <div className={`b mv5 t-heading-7 ${handles.holidayHoursLabel}`}>
+            <FormattedMessage id="store/yext-store-locator.storeHolidayHours.label" />
+          </div>
+          <div>
+            {group.holidayHours.map((hours, i) => {
+              return (
+                <div
+                  key={`hour_${i}`}
+                  className={`${handles.hoursRow} mv2 flex justify-between`}
+                >
+                  <div className={handles.hoursDayOfWeek}>
+                    {hours.label || (
+                      <FormattedDate
+                        month="short"
+                        day="2-digit"
+                        value={hours.date}
+                      />
+                    )}
+                  </div>
+                  <div className={handles.hoursText}>{hours.hoursDisplay}</div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -39,11 +39,16 @@ const hoursFormat = (time: string, use24HourDisplay: boolean) => {
 }
 
 const formatBusinessHours = (entity: Entity, format: boolean) => {
-  const businessHours = Object.keys(entity.hours).map((key) => {
-    const hours = entity.hours[key as keyof typeof DAY].openIntervals
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const businessHours = Object.keys(entity.hours).reduce((hours: any, key) => {
+    const daysHours = entity.hours[key as keyof typeof DAY]?.openIntervals
 
-    const start = hours?.[0].start
-    const end = hours?.[0].end
+    if (!daysHours) {
+      return hours
+    }
+
+    const start = daysHours?.[0].start
+    const end = daysHours?.[0].end
 
     const openingTime = start ? hoursFormat(start, format) : null
     const closingTime = end ? hoursFormat(end, format) : null
@@ -52,15 +57,68 @@ const formatBusinessHours = (entity: Entity, format: boolean) => {
         ? `Closed`
         : `${openingTime ?? ''} - ${closingTime ?? ''}`
 
-    return {
+    hours.push({
       dayOfWeek: DAY[key as keyof typeof DAY],
       openingTime,
       closingTime,
       hoursDisplay,
-    }
-  })
+    })
+
+    return hours
+  }, [])
 
   return businessHours
+}
+
+const holidayLabel = (date: string) => {
+  switch (date.slice(-5)) {
+    case '11-24':
+      return 'Christmas Eve'
+
+    case '12-25':
+      return 'Christmas Day'
+
+    case '12-31':
+      return 'New Years Eve'
+
+    case '01-01':
+      return 'New Years Day'
+
+    default:
+      return null
+  }
+}
+
+const formatHolidayHours = (entity: Entity, format: boolean) => {
+  const holidays = entity.hours.holidayHours
+
+  if (holidays) {
+    return holidays.map((holiday) => {
+      const hours = holiday.openIntervals
+
+      const start = hours?.[0].start
+      const end = hours?.[0].end
+
+      const openingTime = start ? hoursFormat(start, format) : null
+      const closingTime = end ? hoursFormat(end, format) : null
+      const hoursDisplay =
+        !openingTime && !closingTime
+          ? `Closed`
+          : `${openingTime ?? ''} - ${closingTime ?? ''}`
+
+      const dateParts = holiday.date.split('-')
+
+      return {
+        date: `${dateParts[1]}/${dateParts[2]}/${dateParts[0]}`,
+        label: holidayLabel(holiday.date),
+        openingTime,
+        closingTime,
+        hoursDisplay,
+      }
+    })
+  }
+
+  return []
 }
 
 const mapCustomFields = (entity: EntityCustomFields) => {
@@ -295,6 +353,8 @@ export const resolvers = {
             },
           },
           businessHours: formatBusinessHours(entity, use24Hour),
+          holidayHours: formatHolidayHours(entity, use24Hour),
+
           googleMapLink: buildMapLink(entity),
           brands: entity.brands,
           paymentOptions: entity.paymentOptions,

@@ -3,6 +3,7 @@ import { defineMessages } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 
 import { StoreGroupContext } from './contexts/StoreGroupContext'
+import { getClosingTime } from './getClosingTime'
 
 const CSS_HANDLES = ['openBanner']
 
@@ -14,9 +15,7 @@ const StoreOpenBanner: StorefrontFunctionComponent = () => {
     return null
   }
 
-  const today = new Date().getDay()
-  const hours = group.businessHours.find((e) => e.dayOfWeek === today)
-  const closingTime = hours?.closingTime
+  const closingTime = getClosingTime(group)
 
   return (
     <Fragment>

@@ -214,7 +214,10 @@ The Yext Store Locator app provides the following blocks for your use:
 | `customDataImageListContainer` |
 | `customDataImageListItem`      |
 | `hoursContainer`               |
+| `normalHours`                  |
+| `holidayHours`                 |
 | `hoursLabel`                   |
+| `holidayHoursLabel`            |
 | `hoursRow`                     |
 | `hoursDayOfWeek`               |
 | `hoursText`                    |

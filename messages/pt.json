@@ -2,6 +2,7 @@
   "store/yext-store-locator.storeAddress.linkText": "Get Directions",
   "store/yext-store-locator.storeBackLink.linkText": "Back to all stores",
   "store/yext-store-locator.storeHours.label": "Store Hours",
+  "store/yext-store-locator.storeHolidayHours.label": "Holiday Hours",
   "store/yext-store-locator.pinpoints.directions": "Get Directions",
   "store/yext-store-locator.storeUberLink.linkText": "Get a Ride",
   "store/yext-store-locator.day-of-week-sunday": "Sunday",

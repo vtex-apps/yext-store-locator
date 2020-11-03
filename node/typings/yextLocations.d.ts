@@ -114,11 +114,17 @@ interface Hours {
   friday: Day
   saturday: Day
   sunday: Day
+  holidayHours?: Holiday[]
 }
 
 interface Day {
   openIntervals?: OpenIntervalsEntity[]
   isClosed: boolean
+}
+
+interface Holiday {
+  date: string
+  openIntervals?: OpenIntervalsEntity[]
 }
 
 interface OpenIntervalsEntity {

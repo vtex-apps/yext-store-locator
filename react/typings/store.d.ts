@@ -18,6 +18,14 @@ interface BusinessHours {
   closingTime: string | null
   hoursDisplay: string
 }
+
+interface HolidayHour {
+  date: string
+  label: string
+  openingTime: string
+  closingTime: string
+  hoursDisplay: string
+}
 interface Address {
   addressId: string
   cacheId: string
@@ -45,6 +53,7 @@ interface Location {
 }
 export interface SpecificationGroup {
   businessHours: [BusinessHours]
+  holidayHours: [HolidayHour]
   isActive: boolean
   description: string
   name: string

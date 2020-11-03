@@ -7,6 +7,7 @@ import GET_STORES from './queries/getStores.graphql'
 import StoreLink from './components/StoreLink'
 import { StoreGroupContext } from './contexts/StoreGroupContext'
 import { StoresResult } from './typings/store'
+import { getClosingTime } from './getClosingTime'
 
 const CSS_HANDLES = [
   'nearbyLocationsBlock',
@@ -43,10 +44,7 @@ const StoreNearbyLocations: StorefrontFunctionComponent = () => {
     })
   }
 
-  const today = new Date().getDay()
-  const hours = group.businessHours.find((e) => e.dayOfWeek === today)
-  const closingTime = hours?.closingTime
-
+  const closingTime = getClosingTime(group)
   const closingMessage = closingTime
     ? `Open Until ${closingTime}`
     : 'Closed today'

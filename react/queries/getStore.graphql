@@ -36,6 +36,13 @@ query getStore($locationId: String!) {
         closingTime
         hoursDisplay
       }
+      holidayHours {
+        date
+        label
+        openingTime
+        closingTime
+        hoursDisplay
+      }
       googleMapLink
       brands
       paymentOptions

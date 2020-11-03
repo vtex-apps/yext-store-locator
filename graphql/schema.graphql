@@ -42,6 +42,7 @@ type StoreItemType {
   emails: [String]
   address: Address
   businessHours: [Hours]
+  holidayHours: [HolidayHour]
   googleMapLink: String
   brands: [String]
   paymentOptions: [String]
@@ -113,6 +114,14 @@ type LocationType {
 
 type Hours {
   dayOfWeek: Int
+  openingTime: String
+  closingTime: String
+  hoursDisplay: String
+}
+
+type HolidayHour {
+  date: String
+  label: String
   openingTime: String
   closingTime: String
   hoursDisplay: String
