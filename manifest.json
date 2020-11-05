@@ -1,5 +1,5 @@
 {
-  "vendor": "vtex",
+  "vendor": "vtexus",
   "name": "yext-store-locator",
   "version": "0.0.1",
   "title": "Yext Store Locator",
@@ -22,9 +22,7 @@
     "vtex.render-runtime": "8.x",
     "vtex.css-handles": "0.x"
   },
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "billingOptions": {
     "termsURL": "https://compliance.vtex.com/gdpr/policies/vtex-privacy-policy",
     "support": {
@@ -32,9 +30,7 @@
     },
     "free": true,
     "type": "free",
-    "availableCountries": [
-      "*"
-    ]
+    "availableCountries": ["*"]
   },
   "policies": [
     {
