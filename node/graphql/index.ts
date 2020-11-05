@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { method } from '@vtex/api'
 import slugify from 'slugify'
 
