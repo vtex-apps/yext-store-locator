@@ -36,10 +36,7 @@ const StoreBrands: StorefrontFunctionComponent<StoreBrandsProps> = ({
           style={{ columnCount: 3, padding: 0 }}
         >
           {group.brands.map((brand, i) => (
-            <li
-              key={i}
-              className={handles.brandsItem}
-            >
+            <li key={i} className={handles.brandsItem}>
               {brand}
             </li>
           ))}
