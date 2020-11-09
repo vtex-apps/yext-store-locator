@@ -4,7 +4,7 @@ export const getClosingTime = (group: SpecificationGroup): string | null => {
   const today = new Date()
 
   today.setHours(0, 0, 0, 0)
-  const day = today.getDate()
+  const day = today.getDay()
 
   const holidayHours = group.holidayHours.find(
     (e) => new Date(e.date).getTime() === today.getTime()
