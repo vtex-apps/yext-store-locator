@@ -18,6 +18,7 @@
     "vtex.rich-text": "0.x",
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "3.x",
+    "vtex.store-sitemap": "2.x",
     "vtex.styleguide": "9.x",
     "vtex.render-runtime": "8.x",
     "vtex.css-handles": "0.x"
@@ -47,23 +48,12 @@
     {
       "name": "outbound-access",
       "attrs": {
-        "host": "{{account}}.vtexcommercestable.com.br",
-        "path": "/api/checkout/pub/pickup-points/*"
-      }
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "portal.vtexcommercestable.com.br",
-        "path": "/api/segments/*"
-      }
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
         "host": "liveapi.yext.com",
         "path": "/*"
       }
+    },
+    {
+      "name": "vtex.store-sitemap:resolve-graphql"
     },
     {
       "name": "LogisticsViewer"
