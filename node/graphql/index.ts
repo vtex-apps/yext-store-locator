@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { method } from '@vtex/api'
+import { LogLevel, method } from '@vtex/api'
 import slugify from 'slugify'
 
 import { Entity, EntityCustomFields } from '../typings/yextLocations'
@@ -253,12 +253,23 @@ export const resolvers = {
     getStores: async (_: any, param: any, ctx: Context) => {
       const { location, limit, filter } = param
       const {
-        clients: { apps, yext },
+        clients: { apps, yext, sitemap },
+        vtex: { logger },
       } = ctx
 
       const appId = process.env.VTEX_APP_ID as string
       const settings = await apps.getAppSettings(appId)
       const { apiKey, use24Hour, defaultLocation } = settings
+
+      try {
+        sitemap.hasSitemap().then((has: any) => {
+          if (has === false) {
+            sitemap.saveIndex()
+          }
+        })
+      } catch (err) {
+        logger.log(err, LogLevel.Error)
+      }
 
       const { response } = await yext.getLocationsByAddress({
         apiKey,
