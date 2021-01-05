@@ -30,7 +30,13 @@ const CLOSED_STORES_FILTER = '%7B%22closed%22%3A%7B%22%24eq%22%3Afalse%7D%7D'
 
 export default class Yext extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
-    super('https://liveapi.yext.com', context, options)
+    super('http://liveapi.yext.com', context, {
+      ...options,
+      headers: {
+        'X-Vtex-Use-Https': 'true',
+        'Proxy-Authorization': context.authToken,
+      },
+    })
   }
 
   public async getLocationsByAddress({
