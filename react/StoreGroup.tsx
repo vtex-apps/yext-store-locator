@@ -17,9 +17,9 @@ const StoreGroup: StorefrontFunctionComponent<StoreGroupProps> = ({
   const { history } = useRuntime()
   const [getStore, { data, called }] = useLazyQuery<StoreResult>(GET_STORE)
 
-  if (history && !called) {
-    const locationId = history.location.state.navigationRoute.params.store_id
+  const locationId = history?.location.state.navigationRoute.params.store_id
 
+  if (locationId && !called) {
     getStore({
       variables: {
         locationId,
