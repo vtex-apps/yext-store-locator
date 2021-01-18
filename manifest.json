@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "yext-store-locator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "title": "Yext Store Locator",
   "description": "Use Yext data to add a store locator and indivdual location pages to your VTEX store",
   "builders": {
