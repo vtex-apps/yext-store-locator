@@ -19,7 +19,6 @@
   "store/yext-store-locator.short-day-thursday": "store/yext-store-locator.short-day-thursday",
   "store/yext-store-locator.short-day-friday": "store/yext-store-locator.short-day-friday",
   "store/yext-store-locator.short-day-saturday": "store/yext-store-locator.short-day-saturday",
-  "store/yext-store-locator.hours-label": "store/yext-store-locator.hours-label",
   "admin/editor.storeAddress.title": "admin/editor.storeAddress.title",
   "admin/editor.storeAddress.description": "admin/editor.storeAddress.description",
   "admin/editor.storeAddressLabel.title": "admin/editor.storeAddressLabel.title",
@@ -106,6 +105,7 @@
   "admin/editor.StoreSocialLinksYouTubeHandle.description": "admin/editor.StoreSocialLinksYouTubeHandle.description",
   "admin/editor.StoreTitle.title": "admin/editor.StoreTitle.title",
   "admin/editor.StoreTitle.description": "admin/editor.StoreTitle.description",
+  "store/yext-store-locator.hours-label": "store/yext-store-locator.hours-label",
   "admin/editor.storeUberLink.title": "admin/editor.storeUberLink.title",
   "admin/editor.storeUberLink.description": "admin/editor.storeUberLink.description"
 }

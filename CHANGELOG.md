@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Map pin info not being displayed due to `intl` error
+
 ## [0.0.7] - 2021-01-18
 
 ### Fixed

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react'
-import { defineMessages, FormattedMessage, injectIntl } from 'react-intl'
+import { useIntl, defineMessages } from 'react-intl'
 import {
   GoogleMap,
   Marker,
@@ -32,6 +32,41 @@ const CSS_HANDLES = [
   'markerInfoAddress',
 ] as const
 
+const messages = defineMessages({
+  hoursLabel: {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.hours-label',
+  },
+  '0': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-sunday',
+  },
+  '1': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-monday',
+  },
+  '2': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-tuesday',
+  },
+  '3': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-wednesday',
+  },
+  '4': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-thursday',
+  },
+  '5': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-friday',
+  },
+  '6': {
+    defaultMessage: '',
+    id: 'store/yext-store-locator.short-day-saturday',
+  },
+})
+
 interface PinpointProps {
   items: SpecificationGroup[]
   onChangeCenter: (lon: number, lat: number, zoomSize: number) => void
@@ -40,7 +75,6 @@ interface PinpointProps {
   icon: string
   iconWidth: string
   iconHeight: string
-  intl: any
 }
 
 const Pinpoints = withScriptjs(
@@ -50,43 +84,10 @@ const Pinpoints = withScriptjs(
     })
 
     const handles = useCssHandles(CSS_HANDLES)
-
-    const messages = defineMessages({
-      hoursLabel: {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.hours-label',
-      },
-      '0': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-sunday',
-      },
-      '1': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-monday',
-      },
-      '2': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-tuesday',
-      },
-      '3': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-wednesday',
-      },
-      '4': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-thursday',
-      },
-      '5': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-friday',
-      },
-      '6': {
-        defaultMessage: '',
-        id: 'store/yext-store-locator.short-day-saturday',
-      },
-    })
-
     const { navigate } = useRuntime()
+    const { formatMessage } = useIntl()
+    const [lng, lat] = props.center
+    const { zoom } = props
 
     const handleMarkState = (id: string) => {
       const markerState = !state.markerState[id]
@@ -99,9 +100,6 @@ const Pinpoints = withScriptjs(
         markerState,
       })
     }
-
-    const [lng, lat] = props.center
-    const { intl, zoom } = props
 
     const goTo = (item: any) => {
       const { state: _state, postalCode } = item.address
@@ -186,7 +184,7 @@ const Pinpoints = withScriptjs(
                           className={handles.markerInfoHours}
                         >
                           <span className="">
-                            {intl.formatMessage(messages[hours.dayOfWeek])}
+                            {formatMessage(messages[hours.dayOfWeek])}
                           </span>
                           <br />
                           <span className="">{hours.hoursDisplay}</span>
@@ -198,7 +196,9 @@ const Pinpoints = withScriptjs(
                       className={`${handles.markerInfoDirectionsLink} vtex-link`}
                       href={item.googleMapLink}
                     >
-                      <FormattedMessage id="store/yext-store-locator.pinpoints.directions" />
+                      {formatMessage({
+                        id: 'store/yext-store-locator.pinpoints.directions',
+                      })}
                     </a>
                   </div>
                 </InfoWindow>
@@ -211,4 +211,4 @@ const Pinpoints = withScriptjs(
   })
 )
 
-export default injectIntl(Pinpoints)
+export default Pinpoints
